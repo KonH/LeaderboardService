@@ -6,7 +6,10 @@
 	},
 	"dependencies": {
 		"Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
-		"Microsoft.AspNetCore.Mvc": "1.1.2"
+		"Microsoft.AspNetCore.Mvc": "1.1.2",
+		"Swashbuckle": "6.0.0-beta901",
+		"Swashbuckle.SwaggerGen": "6.0.0-beta901",
+		"Swashbuckle.SwaggerUi": "6.0.0-beta901"
 	},
 	"frameworks": {
 		"netcoreapp1.1": {

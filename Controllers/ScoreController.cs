@@ -15,6 +15,7 @@ namespace LeaderboardService.Controllers
 			ScoreItems = scoreItems;
 		}
 
+		[HttpGet]
 		public IEnumerable<ScoreItem> GetAll()
 		{
 			return ScoreItems.GetAll();

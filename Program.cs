@@ -26,12 +26,16 @@ namespace LeaderboardService
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddMvc();
+			services.AddLogging();
 			services.AddSingleton<IScoreRepository, ScoreRepository>();
+			services.AddSwaggerGen();
     	}
 
 		public void Configure(IApplicationBuilder app)
 		{
 			app.UseMvcWithDefaultRoute();
+			app.UseSwagger();
+			app.UseSwaggerUi();
 		}
 	}
 }
