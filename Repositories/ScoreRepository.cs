@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
+using LeaderboardService.Models;
 
-namespace LeaderboardService.Models
+namespace LeaderboardService.Repositories
 {
 	public class ScoreRepository : IScoreRepository
 	{

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using LeaderboardService.Models;
+using LeaderboardService.Repositories;
 
 namespace LeaderboardService.Controllers
 {

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using LeaderboardService.Models;
 
-namespace LeaderboardService.Models
+namespace LeaderboardService.Repositories
 {
 	public interface IScoreRepository
 	{
