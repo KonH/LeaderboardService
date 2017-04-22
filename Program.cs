@@ -1,43 +1,37 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Routing;
+using LeaderboardService.Models;
 
 namespace LeaderboardService
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            var urls = new string[]{ "http://*:8080" };
-            var host = new WebHostBuilder()
-                .UseKestrel()
-                .UseStartup<Startup>()
-                .UseUrls(urls)
-                .Build();
 
-            host.Run();
-        }
-    }
+	public class Program
+	{
+		public static void Main(string[] args)
+		{
+			var urls = new string[]{ "http://*:8080" };
+			var host = new WebHostBuilder()
+				.UseKestrel()
+				.UseStartup<Startup>()
+				.UseUrls(urls)
+				.Build();
 
-    public class Startup
-    {
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddRouting();
-        }
+			host.Run();
+		}
+	}
 
-        public void Configure(IApplicationBuilder app)
-        {  
-            var defaultRouteHandler = new RouteHandler(context =>
-            {
-                return context.Response.WriteAsync("LeaderboardService v.1.0.0");
-            });
-            var routeBuilder = new RouteBuilder(app, defaultRouteHandler);
-            routeBuilder.MapRoute("default", "");
-            var routes = routeBuilder.Build();
-            app.UseRouter(routes);
-        }
-    }
+	public class Startup
+	{
+		public void ConfigureServices(IServiceCollection services)
+		{
+			services.AddMvc();
+			services.AddSingleton<IScoreRepository, ScoreRepository>();
+    	}
+
+		public void Configure(IApplicationBuilder app)
+		{
+			app.UseMvcWithDefaultRoute();
+		}
+	}
 }
