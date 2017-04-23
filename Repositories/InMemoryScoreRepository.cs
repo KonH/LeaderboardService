@@ -5,12 +5,12 @@ using LeaderboardService.Models;
 
 namespace LeaderboardService.Repositories
 {
-	public class ScoreRepository : IScoreRepository
+	public class InMemoryScoreRepository : IScoreRepository
 	{
 		private static ConcurrentDictionary<string, ScoreItem> _scores =
 			new ConcurrentDictionary<string, ScoreItem>();
 
-		public ScoreRepository()
+		public InMemoryScoreRepository()
 		{
 			Add(new ScoreItem { Score = 999 });
 		}
