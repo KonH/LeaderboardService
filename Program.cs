@@ -28,6 +28,7 @@ namespace LeaderboardService
 			services.AddMvc();
 			services.AddLogging();
 			services.AddSingleton<IScoreRepository, InMemoryScoreRepository>();
+			services.AddSingleton<IUserRepository, InMemoryUserRepository>();
 			services.AddSwaggerGen();
     	}
 
