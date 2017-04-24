@@ -10,9 +10,12 @@ namespace LeaderboardService.Controllers
 	{
 		public IScoreRepository ScoreItems { get; set; }
 
-		public ScoreController(IScoreRepository scoreItems)
+		public IGameRepository GameItems { get; set; }
+
+		public ScoreController(IScoreRepository scoreItems, IGameRepository gameItems)
 		{
 			ScoreItems = scoreItems;
+			GameItems = gameItems;
 		}
 
 		[HttpGet]
@@ -39,6 +42,10 @@ namespace LeaderboardService.Controllers
 			{
 				return BadRequest();
 			}
+			if (GameItems.Find(item.Game) == null)
+			{
+				return BadRequest("Game not found");
+			}
 			ScoreItems.Add(item);
 			return CreatedAtRoute("GetScore", new { id = item.Key }, item);
 		}
@@ -56,8 +63,13 @@ namespace LeaderboardService.Controllers
 			{
 				return NotFound();
 			}
-
+			
 			item.Key = score.Key;
+			
+			if (GameItems.Find(item.Game) == null)
+			{
+				return BadRequest("Game not found");
+			}
 
 			ScoreItems.Update(item);
 			return new NoContentResult();
