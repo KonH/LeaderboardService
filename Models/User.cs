@@ -1,18 +1,25 @@
+using System;
 using System.Collections.Generic;
 
 namespace LeaderboardService.Models
 {
     public class User
     {
+		[Flags]
 		public enum Permission {
-			SendScores,
-			ManageScores,
-			ManageUsers,
-			ManageGames
+			ReadScores,
+			PostScores,
+			UpdateScores,
+			ReadUsers,
+			PostUsers,
+			UpdateUsers,
+			ReadGames,
+			PostGames,
+			UpdateGames
 		}
 
 		public class Role {
-			public List<Permission> Permissions { get; set; }
+			public Permission Permissions { get; set; }
 			public string Game { get; set; }
 		}
 

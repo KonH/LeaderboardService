@@ -15,7 +15,7 @@ namespace LeaderboardService.Repositories
 				Name = "User",
 				Roles = new List<User.Role>(new User.Role[] {
 					new User.Role() {
-						Permissions = new List<User.Permission>(new User.Permission[]{User.Permission.SendScores}),
+						Permissions = User.Permission.PostScores,
 						Game = "Game"
 					}
 				}),
@@ -26,13 +26,14 @@ namespace LeaderboardService.Repositories
 				Name = "Admin",
 				Roles = new List<User.Role>(new User.Role[] {
 					new User.Role() { 
-						Permissions = new List<User.Permission>(
-							new User.Permission[]{
-								User.Permission.ManageScores,
-								User.Permission.ManageUsers,
-								User.Permission.ManageGames
-							}
-						)
+						Permissions = 
+							User.Permission.UpdateScores |
+							User.Permission.ReadGames | 
+							User.Permission.PostGames |
+							User.Permission.UpdateGames |
+							User.Permission.ReadUsers |
+							User.Permission.PostUsers |
+							User.Permission.UpdateUsers
 					}
 				}),
 				// Admin:password2
