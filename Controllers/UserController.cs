@@ -43,24 +43,6 @@ namespace LeaderboardService.Controllers
 			return CreatedAtRoute("GetUser", new { name = item.Name }, item);
 		}
 
-		[HttpPut("{name}")]
-		public IActionResult Update(string name, [FromBody] User item)
-		{
-			if (item == null || item.Name != name)
-			{
-				return BadRequest();
-			}
-
-			var user = Users.Find(name);
-			if (user == null)
-			{
-				return NotFound();
-			}
-
-			Users.Update(item);
-			return new NoContentResult();
-		}
-
 		[HttpPatch("{name}")]
 		public IActionResult Update([FromBody] User item, string name)
 		{

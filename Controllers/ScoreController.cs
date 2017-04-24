@@ -43,24 +43,6 @@ namespace LeaderboardService.Controllers
 			return CreatedAtRoute("GetScore", new { id = item.Key }, item);
 		}
 
-		[HttpPut("{id}")]
-		public IActionResult Update(string id, [FromBody] ScoreItem item)
-		{
-			if (item == null || item.Key != id)
-			{
-				return BadRequest();
-			}
-
-			var score = ScoreItems.Find(id);
-			if (score == null)
-			{
-				return NotFound();
-			}
-
-			ScoreItems.Update(item);
-			return new NoContentResult();
-		}
-
 		[HttpPatch("{id}")]
 		public IActionResult Update([FromBody] ScoreItem item, string id)
 		{
