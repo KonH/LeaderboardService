@@ -1,7 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using LeaderboardService.Repositories;
+﻿using Microsoft.AspNetCore.Hosting;
 
 namespace LeaderboardService
 {
@@ -18,26 +15,6 @@ namespace LeaderboardService
 				.Build();
 
 			host.Run();
-		}
-	}
-
-	public class Startup
-	{
-		public void ConfigureServices(IServiceCollection services)
-		{
-			services.AddMvc();
-			services.AddLogging();
-			services.AddSingleton<IScoreRepository, InMemoryScoreRepository>();
-			services.AddSingleton<IUserRepository, InMemoryUserRepository>();
-			services.AddSingleton<IGameRepository, InMemoryGameRepository>();
-			services.AddSwaggerGen();
-    	}
-
-		public void Configure(IApplicationBuilder app)
-		{
-			app.UseMvcWithDefaultRoute();
-			app.UseSwagger();
-			app.UseSwaggerUi();
 		}
 	}
 }

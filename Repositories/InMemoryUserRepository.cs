@@ -12,32 +12,30 @@ namespace LeaderboardService.Repositories
 		public InMemoryUserRepository()
 		{
 			Add( new User {
-				Name = "User",
-				Roles = new List<User.Role>(new User.Role[] {
-					new User.Role() {
-						Permissions = User.Permission.PostScores,
+				Name = "user",
+				Password = "user",
+				Roles = new List<UserRole>(new UserRole[] {
+					new UserRole() {
+						Permissions = UserPermission.PostScores | UserPermission.ReadScores,
 						Game = "Game"
 					}
-				}),
-				// User:password1
-				AuthHash = "VXNlcjpwYXNzd29yZDE="
+				})
 			});
 			Add(new User {
-				Name = "Admin",
-				Roles = new List<User.Role>(new User.Role[] {
-					new User.Role() { 
+				Name = "admin",
+				Password = "admin",
+				Roles = new List<UserRole>(new UserRole[] {
+					new UserRole() { 
 						Permissions = 
-							User.Permission.UpdateScores |
-							User.Permission.ReadGames | 
-							User.Permission.PostGames |
-							User.Permission.UpdateGames |
-							User.Permission.ReadUsers |
-							User.Permission.PostUsers |
-							User.Permission.UpdateUsers
+							UserPermission.UpdateScores |
+							UserPermission.ReadGames | 
+							UserPermission.PostGames |
+							UserPermission.UpdateGames |
+							UserPermission.ReadUsers |
+							UserPermission.PostUsers |
+							UserPermission.UpdateUsers
 					}
-				}),
-				// Admin:password2
-				AuthHash = "QWRtaW46cGFzc3dvcmQy"
+				})
 			});
 		}
 
