@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using LeaderboardService.Models;
 using LeaderboardService.Repositories;
+using LeaderboardService.Managers;
 
 namespace LeaderboardService.Controllers
 {
@@ -9,21 +10,32 @@ namespace LeaderboardService.Controllers
 	public class UserController : Controller
 	{
 		public IUserRepository Users { get; set; }
+		public IAuthManager Auth { get; set; }
 
-		public UserController(IUserRepository users)
+		public UserController(IUserRepository users, IAuthManager auth)
 		{
 			Users = users;
+			Auth = auth;
 		}
 
 		[HttpGet]
-		public IEnumerable<User> GetAll()
+		public IEnumerable<User> GetAll([FromBasicAuth] string auth)
 		{
+			if (!Auth.IsAllowed(auth, UserPermission.ReadUsers))
+			{
+				Response.StatusCode = Auth.StatusCode;
+				return null;
+			}
 			return Users.GetAll();
 		}
 
 		[HttpGet("{name}", Name = "GetUser")]
-		public IActionResult GetByName(string name)
+		public IActionResult GetByName([FromBasicAuth] string auth, string name)
 		{
+			if (!Auth.IsAllowed(auth, UserPermission.ReadUsers))
+			{
+				return Auth.Result;
+			}
 			var item = Users.Find(name);
 			if (item == null)
 			{
@@ -33,8 +45,12 @@ namespace LeaderboardService.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult Create([FromBody] User item)
+		public IActionResult Create([FromBasicAuth] string auth, [FromBody] User item)
 		{
+			if (!Auth.IsAllowed(auth, UserPermission.PostUsers))
+			{
+				return Auth.Result;
+			}
 			if ( (item == null) || (Users.Find(item.Name) != null) )
 			{
 				return BadRequest();
@@ -44,8 +60,12 @@ namespace LeaderboardService.Controllers
 		}
 
 		[HttpPatch("{name}")]
-		public IActionResult Update([FromBody] User item, string name)
+		public IActionResult Update([FromBasicAuth] string auth, [FromBody] User item, string name)
 		{
+			if (!Auth.IsAllowed(auth, UserPermission.UpdateUsers))
+			{
+				return Auth.Result;
+			}
 			if (item == null)
 			{
 				return BadRequest();
@@ -64,8 +84,12 @@ namespace LeaderboardService.Controllers
 		}
 
 		[HttpDelete("{name}")]
-		public IActionResult Delete(string name)
+		public IActionResult Delete([FromBasicAuth] string auth, string name)
 		{
+			if (!Auth.IsAllowed(auth, UserPermission.UpdateUsers))
+			{
+				return Auth.Result;
+			}
 			var user = Users.Find(name);
 			if (user == null)
 			{

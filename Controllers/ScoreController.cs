@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using LeaderboardService.Models;
 using LeaderboardService.Repositories;
+using LeaderboardService.Managers;
 
 namespace LeaderboardService.Controllers
 {
@@ -9,26 +10,39 @@ namespace LeaderboardService.Controllers
 	public class ScoreController : Controller
 	{
 		public IScoreRepository ScoreItems { get; set; }
-
 		public IGameRepository GameItems { get; set; }
+		public IAuthManager Auth { get; set; }
 
-		public ScoreController(IScoreRepository scoreItems, IGameRepository gameItems)
+		public ScoreController(IScoreRepository scoreItems, IGameRepository gameItems, IAuthManager auth)
 		{
 			ScoreItems = scoreItems;
 			GameItems = gameItems;
+			Auth = auth;
 		}
 
 		[HttpGet]
-		public IEnumerable<ScoreItem> GetAll()
+		public IEnumerable<ScoreItem> GetAll([FromBasicAuth] string auth)
 		{
+			if (!Auth.IsAllowed(auth, UserPermission.ReadScores))
+			{
+				Response.StatusCode = Auth.StatusCode;
+				return null;
+			}
 			return ScoreItems.GetAll();
 		}
 
 		[HttpGet("{id}", Name = "GetScore")]
-		public IActionResult GetById(string id)
+		public IActionResult GetById([FromBasicAuth] string auth, string id)
 		{
 			var item = ScoreItems.Find(id);
-			if (item == null)
+			if ( item != null )
+			{
+				if (!Auth.IsAllowed(auth, item.Game, UserPermission.ReadScores))
+				{
+					return Auth.Result;
+				}
+			}
+			else
 			{
 				return NotFound();
 			}
@@ -36,11 +50,15 @@ namespace LeaderboardService.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult Create([FromBody] ScoreItem item)
+		public IActionResult Create([FromBasicAuth] string auth, [FromBody] ScoreItem item)
 		{
 			if (item == null)
 			{
 				return BadRequest();
+			}
+			if (!Auth.IsAllowed(auth, item.Game, UserPermission.PostScores))
+			{
+				return Auth.Result;
 			}
 			if (GameItems.Find(item.Game) == null)
 			{
@@ -51,7 +69,7 @@ namespace LeaderboardService.Controllers
 		}
 
 		[HttpPatch("{id}")]
-		public IActionResult Update([FromBody] ScoreItem item, string id)
+		public IActionResult Update([FromBasicAuth] string auth, [FromBody] ScoreItem item, string id)
 		{
 			if (item == null)
 			{
@@ -63,9 +81,13 @@ namespace LeaderboardService.Controllers
 			{
 				return NotFound();
 			}
-			
+			if (!Auth.IsAllowed(auth, score.Game, UserPermission.UpdateScores))
+			{
+				return Auth.Result;
+			}
+
 			item.Key = score.Key;
-			
+
 			if (GameItems.Find(item.Game) == null)
 			{
 				return BadRequest("Game not found");
@@ -76,12 +98,16 @@ namespace LeaderboardService.Controllers
 		}
 
 		[HttpDelete("{id}")]
-		public IActionResult Delete(string id)
+		public IActionResult Delete([FromBasicAuth] string auth, string id)
 		{
 			var score = ScoreItems.Find(id);
 			if (score == null)
 			{
 				return NotFound();
+			}
+			if (!Auth.IsAllowed(auth, score.Game, UserPermission.UpdateScores))
+			{
+				return Auth.Result;
 			}
 
 			ScoreItems.Remove(id);

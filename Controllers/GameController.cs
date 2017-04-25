@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using LeaderboardService.Models;
 using LeaderboardService.Repositories;
+using LeaderboardService.Managers;
 
 namespace LeaderboardService.Controllers
 {
@@ -9,21 +10,32 @@ namespace LeaderboardService.Controllers
 	public class GameController : Controller
 	{
 		public IGameRepository Games { get; set; }
+		public IAuthManager Auth { get; set; }
 
-		public GameController(IGameRepository games)
+		public GameController(IGameRepository games, IAuthManager auth)
 		{
 			Games = games;
+			Auth = auth;
 		}
 
 		[HttpGet]
-		public IEnumerable<Game> GetAll()
+		public IEnumerable<Game> GetAll([FromBasicAuth] string auth)
 		{
+			if (!Auth.IsAllowed(auth, UserPermission.ReadGames))
+			{
+				Response.StatusCode = Auth.StatusCode;
+				return null;
+			}
 			return Games.GetAll();
 		}
 
 		[HttpGet("{name}", Name = "GetGame")]
-		public IActionResult GetByName(string name)
+		public IActionResult GetByName([FromBasicAuth] string auth, string name)
 		{
+			if (!Auth.IsAllowed(auth, name, UserPermission.ReadGames))
+			{
+				return Auth.Result;
+			}
 			var item = Games.Find(name);
 			if (item == null)
 			{
@@ -33,22 +45,35 @@ namespace LeaderboardService.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult Create([FromBody] Game item)
+		public IActionResult Create([FromBasicAuth] string auth, [FromBody] Game item)
 		{
-			if ( (item == null) || (Games.Find(item.Name) != null) )
+			if ( item == null )
 			{
 				return BadRequest();
 			}
+			if (!Auth.IsAllowed(auth, item.Name, UserPermission.PostGames))
+			{
+				return Auth.Result;
+			}
+			if ( Games.Find(item.Name) != null ) 
+			{
+				return BadRequest();
+			}
+
 			Games.Add(item);
 			return CreatedAtRoute("GetGame", new { name = item.Name }, item);
 		}
 
 		[HttpPatch("{name}")]
-		public IActionResult Update([FromBody] Game item, string name)
+		public IActionResult Update([FromBasicAuth] string auth, [FromBody] Game item, string name)
 		{
 			if (item == null)
 			{
 				return BadRequest();
+			}
+			if (!Auth.IsAllowed(auth, name, UserPermission.UpdateGames))
+			{
+				return Auth.Result;
 			}
 
 			var game = Games.Find(name);
@@ -64,8 +89,12 @@ namespace LeaderboardService.Controllers
 		}
 
 		[HttpDelete("{name}")]
-		public IActionResult Delete(string name)
+		public IActionResult Delete([FromBasicAuth] string auth, string name)
 		{
+			if (!Auth.IsAllowed(auth, name, UserPermission.UpdateGames))
+			{
+				return Auth.Result;
+			}
 			var game = Games.Find(name);
 			if (game == null)
 			{
