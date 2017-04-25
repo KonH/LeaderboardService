@@ -3,13 +3,14 @@ using System.Text;
 using System.Linq;
 using LeaderboardService.Models;
 using LeaderboardService.Repositories;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LeaderboardService.Managers
 {
-	// TODO: Impletement auth
     public class AuthManager : IAuthManager
     {
-		class Credentials {
+		class Credentials 
+		{
 			public string Name { get; set; }
 			public string Password { get; set; }
 
@@ -22,6 +23,7 @@ namespace LeaderboardService.Managers
 
 		public IUserRepository Users { get; set; }
 		public int StatusCode { get; private set; }
+		public IActionResult Result { get; private set; }
 
 		public AuthManager(IUserRepository users) 
 		{
@@ -35,18 +37,21 @@ namespace LeaderboardService.Managers
 
 		bool NeedAuth() 
 		{
+			Result = new UnauthorizedResult();
 			StatusCode = 401;
 			return false;
 		}
 
 		bool Forbidden()
 		{
+			Result = new ForbidResult();
 			StatusCode = 403;
 			return false;
 		}
 
 		bool Normal() 
 		{
+			Result = new OkResult();
 			StatusCode = 200;
 			return true;
 		}
@@ -87,7 +92,7 @@ namespace LeaderboardService.Managers
 
 		UserRole FindRole(User user, string game) 
 		{
-			return user.Roles.FirstOrDefault(role => role.Game == game);
+			return user.Roles.FirstOrDefault(role => ((role.Game == null) || (role.Game == game)));
 		}
 
 		bool HasPermission(UserRole role, UserPermission permission) 
