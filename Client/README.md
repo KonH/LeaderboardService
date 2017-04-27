@@ -98,6 +98,9 @@ Class | Method | HTTP request | Description
 *GameApi* | [**ApiGameByNamePatch**](docs/GameApi.md#apigamebynamepatch) | **PATCH** /api/Game/{name} | 
 *GameApi* | [**ApiGameGet**](docs/GameApi.md#apigameget) | **GET** /api/Game | 
 *GameApi* | [**ApiGamePost**](docs/GameApi.md#apigamepost) | **POST** /api/Game | 
+*ScoreApi* | [**ApiScoreByGameByParamByVersionGet**](docs/ScoreApi.md#apiscorebygamebyparambyversionget) | **GET** /api/Score/{game}/{param}/{version} | 
+*ScoreApi* | [**ApiScoreByGameByParamGet**](docs/ScoreApi.md#apiscorebygamebyparamget) | **GET** /api/Score/{game}/{param} | 
+*ScoreApi* | [**ApiScoreByGameGet**](docs/ScoreApi.md#apiscorebygameget) | **GET** /api/Score/{game} | 
 *ScoreApi* | [**ApiScoreByIdDelete**](docs/ScoreApi.md#apiscorebyiddelete) | **DELETE** /api/Score/{id} | 
 *ScoreApi* | [**ApiScoreByIdGet**](docs/ScoreApi.md#apiscorebyidget) | **GET** /api/Score/{id} | 
 *ScoreApi* | [**ApiScoreByIdPatch**](docs/ScoreApi.md#apiscorebyidpatch) | **PATCH** /api/Score/{id} | 
