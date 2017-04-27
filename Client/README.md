@@ -103,6 +103,8 @@ Class | Method | HTTP request | Description
 *ScoreApi* | [**ApiScoreByIdPatch**](docs/ScoreApi.md#apiscorebyidpatch) | **PATCH** /api/Score/{id} | 
 *ScoreApi* | [**ApiScoreGet**](docs/ScoreApi.md#apiscoreget) | **GET** /api/Score | 
 *ScoreApi* | [**ApiScorePost**](docs/ScoreApi.md#apiscorepost) | **POST** /api/Score | 
+*TestApi* | [**ApiTestCleanupPost**](docs/TestApi.md#apitestcleanuppost) | **POST** /api/Test/cleanup | 
+*TestApi* | [**ApiTestPreparePost**](docs/TestApi.md#apitestpreparepost) | **POST** /api/Test/prepare | 
 *UserApi* | [**ApiUserByNameDelete**](docs/UserApi.md#apiuserbynamedelete) | **DELETE** /api/User/{name} | 
 *UserApi* | [**ApiUserByNameGet**](docs/UserApi.md#apiuserbynameget) | **GET** /api/User/{name} | 
 *UserApi* | [**ApiUserByNamePatch**](docs/UserApi.md#apiuserbynamepatch) | **PATCH** /api/User/{name} | 

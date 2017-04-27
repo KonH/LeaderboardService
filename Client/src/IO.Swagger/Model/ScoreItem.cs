@@ -35,12 +35,14 @@ namespace IO.Swagger.Model
         /// <param name="Key">Key.</param>
         /// <param name="Game">Game.</param>
         /// <param name="Version">Version.</param>
+        /// <param name="Param">Param.</param>
         /// <param name="Score">Score.</param>
-        public ScoreItem(string Key = default(string), string Game = default(string), string Version = default(string), int? Score = default(int?))
+        public ScoreItem(string Key = default(string), string Game = default(string), string Version = default(string), string Param = default(string), int? Score = default(int?))
         {
             this.Key = Key;
             this.Game = Game;
             this.Version = Version;
+            this.Param = Param;
             this.Score = Score;
         }
         
@@ -60,6 +62,11 @@ namespace IO.Swagger.Model
         [DataMember(Name="version", EmitDefaultValue=false)]
         public string Version { get; set; }
         /// <summary>
+        /// Gets or Sets Param
+        /// </summary>
+        [DataMember(Name="param", EmitDefaultValue=false)]
+        public string Param { get; set; }
+        /// <summary>
         /// Gets or Sets Score
         /// </summary>
         [DataMember(Name="score", EmitDefaultValue=false)]
@@ -75,6 +82,7 @@ namespace IO.Swagger.Model
             sb.Append("  Key: ").Append(Key).Append("\n");
             sb.Append("  Game: ").Append(Game).Append("\n");
             sb.Append("  Version: ").Append(Version).Append("\n");
+            sb.Append("  Param: ").Append(Param).Append("\n");
             sb.Append("  Score: ").Append(Score).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -128,6 +136,11 @@ namespace IO.Swagger.Model
                     this.Version.Equals(other.Version)
                 ) && 
                 (
+                    this.Param == other.Param ||
+                    this.Param != null &&
+                    this.Param.Equals(other.Param)
+                ) && 
+                (
                     this.Score == other.Score ||
                     this.Score != null &&
                     this.Score.Equals(other.Score)
@@ -151,6 +164,8 @@ namespace IO.Swagger.Model
                     hash = hash * 59 + this.Game.GetHashCode();
                 if (this.Version != null)
                     hash = hash * 59 + this.Version.GetHashCode();
+                if (this.Param != null)
+                    hash = hash * 59 + this.Param.GetHashCode();
                 if (this.Score != null)
                     hash = hash * 59 + this.Score.GetHashCode();
                 return hash;

@@ -89,6 +89,14 @@ namespace IO.Swagger.Test
             // TODO unit test for the property 'Version'
         }
         /// <summary>
+        /// Test the property 'Param'
+        /// </summary>
+        [Test]
+        public void ParamTest()
+        {
+            // TODO unit test for the property 'Param'
+        }
+        /// <summary>
         /// Test the property 'Score'
         /// </summary>
         [Test]
