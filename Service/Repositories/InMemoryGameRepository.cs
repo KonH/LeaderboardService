@@ -11,7 +11,6 @@ namespace LeaderboardService.Repositories
 
 		public InMemoryGameRepository()
 		{
-			Add( new Game { Name = "Game" });
 		}
 
 		public IEnumerable<Game> GetAll()

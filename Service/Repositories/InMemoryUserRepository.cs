@@ -11,32 +11,6 @@ namespace LeaderboardService.Repositories
 
 		public InMemoryUserRepository()
 		{
-			Add( new User {
-				Name = "user",
-				Password = "user",
-				Roles = new List<UserRole>(new UserRole[] {
-					new UserRole() {
-						Permissions = UserPermission.PostScores | UserPermission.ReadScores,
-						Game = "Game"
-					}
-				})
-			});
-			Add(new User {
-				Name = "admin",
-				Password = "admin",
-				Roles = new List<UserRole>(new UserRole[] {
-					new UserRole() { 
-						Permissions = 
-							UserPermission.UpdateScores |
-							UserPermission.ReadGames | 
-							UserPermission.PostGames |
-							UserPermission.UpdateGames |
-							UserPermission.ReadUsers |
-							UserPermission.PostUsers |
-							UserPermission.UpdateUsers
-					}
-				})
-			});
 		}
 
 		public IEnumerable<User> GetAll()

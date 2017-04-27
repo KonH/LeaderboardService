@@ -12,7 +12,6 @@ namespace LeaderboardService.Repositories
 
 		public InMemoryScoreRepository()
 		{
-			Add(new ScoreItem { Score = 999 });
 		}
 
 		public IEnumerable<ScoreItem> GetAll()
