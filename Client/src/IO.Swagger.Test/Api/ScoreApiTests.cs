@@ -41,7 +41,8 @@ namespace IO.Swagger.Test
         [SetUp]
         public void Init()
         {
-            instance = new ScoreApi();
+            instance = new ScoreApi(Common.DefaultConfig);
+			Common.Prepare();
         }
 
         /// <summary>
@@ -50,7 +51,7 @@ namespace IO.Swagger.Test
         [TearDown]
         public void Cleanup()
         {
-
+			Common.Cleanup();
         }
 
         /// <summary>

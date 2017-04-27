@@ -41,8 +41,9 @@ namespace IO.Swagger.Test
         [SetUp]
         public void Init()
         {
-            instance = new UserApi();
-        }
+            instance = new UserApi(Common.DefaultConfig);
+			Common.Prepare();
+		}
 
         /// <summary>
         /// Clean up after each unit test
@@ -50,8 +51,8 @@ namespace IO.Swagger.Test
         [TearDown]
         public void Cleanup()
         {
-
-        }
+			Common.Cleanup();
+		}
 
         /// <summary>
         /// Test an instance of UserApi
@@ -59,8 +60,7 @@ namespace IO.Swagger.Test
         [Test]
         public void InstanceTest()
         {
-            // TODO uncomment below to test 'IsInstanceOfType' UserApi
-            //Assert.IsInstanceOfType(typeof(UserApi), instance, "instance is a UserApi");
+            Assert.IsInstanceOf(typeof(UserApi), instance, "instance is a UserApi");
         }
 
         
@@ -108,18 +108,37 @@ namespace IO.Swagger.Test
         /// Test ApiUserGet
         /// </summary>
         [Test]
-        public void ApiUserGetTest()
+        public void ApiUserGetTestWithRights()
         {
-            // TODO uncomment below to test the method and replace null with proper value
-            //string authorization = null;
-            //var response = instance.ApiUserGet(authorization);
-            //Assert.IsInstanceOf<List<User>> (response, "response is List<User>");
+            string authorization = Common.AdminAuth;
+            var response = instance.ApiUserGet(authorization);
+            Assert.IsInstanceOf<List<User>> (response, "response is List<User>");
         }
-        
-        /// <summary>
-        /// Test ApiUserPost
-        /// </summary>
-        [Test]
+
+		/// <summary>
+		/// Test ApiUserGet
+		/// </summary>
+		[Test]
+		public void ApiUserGetTestWithNoRights() {
+			string authorization = Common.UserAuth;
+			var ex = Assert.Catch(() => instance.ApiUserGet(authorization)) as ApiException;
+			Assert.AreEqual(Common.ForbiddenCode, ex.ErrorCode);
+		}
+
+		/// <summary>
+		/// Test ApiUserGet
+		/// </summary>
+		[Test]
+		public void ApiUserGetTestWithBadAuth() {
+			string authorization = Common.OtherAuth;
+			var ex = Assert.Catch(() => instance.ApiUserGet(authorization)) as ApiException;
+			Assert.AreEqual(Common.NeedAuthCode, ex.ErrorCode);
+		}
+
+		/// <summary>
+		/// Test ApiUserPost
+		/// </summary>
+		[Test]
         public void ApiUserPostTest()
         {
             // TODO uncomment below to test the method and replace null with proper value

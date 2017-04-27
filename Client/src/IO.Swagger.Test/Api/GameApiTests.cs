@@ -41,8 +41,9 @@ namespace IO.Swagger.Test
         [SetUp]
         public void Init()
         {
-            instance = new GameApi();
-        }
+            instance = new GameApi(Common.DefaultConfig);
+			Common.Prepare();
+		}
 
         /// <summary>
         /// Clean up after each unit test
@@ -50,8 +51,8 @@ namespace IO.Swagger.Test
         [TearDown]
         public void Cleanup()
         {
-
-        }
+			Common.Cleanup();
+		}
 
         /// <summary>
         /// Test an instance of GameApi
