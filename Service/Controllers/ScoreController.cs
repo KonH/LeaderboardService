@@ -21,14 +21,17 @@ namespace LeaderboardService.Controllers
 		}
 
 		[HttpGet]
-		public IEnumerable<ScoreItem> GetAll([FromBasicAuth] string auth)
+		[HttpGet("{game}")]
+		[HttpGet("{game}/{param}")]
+		[HttpGet("{game}/{param}/{version}")]
+		public IEnumerable<ScoreItem> GetAll([FromBasicAuth] string auth, string game = null, string param = null, string version = null)
 		{
-			if (!Auth.IsAllowed(auth, UserPermission.ReadScores))
+			if (!Auth.IsAllowed(auth, game, UserPermission.ReadScores))
 			{
 				Response.StatusCode = Auth.StatusCode;
 				return null;
 			}
-			return ScoreItems.GetAll();
+			return ScoreItems.GetAll(game, param, version);
 		}
 
 		[HttpGet("{id}", Name = "GetScore")]
