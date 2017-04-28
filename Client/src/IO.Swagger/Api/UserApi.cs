@@ -56,8 +56,8 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="name"></param>
         /// <param name="authorization"> (optional)</param>
-        /// <returns></returns>
-        void ApiUserByNameGet (string name, string authorization = null);
+        /// <returns>User</returns>
+        User ApiUserByNameGet (string name, string authorization = null);
 
         /// <summary>
         /// 
@@ -68,8 +68,8 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="name"></param>
         /// <param name="authorization"> (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> ApiUserByNameGetWithHttpInfo (string name, string authorization = null);
+        /// <returns>ApiResponse of User</returns>
+        ApiResponse<User> ApiUserByNameGetWithHttpInfo (string name, string authorization = null);
         /// <summary>
         /// 
         /// </summary>
@@ -125,8 +125,8 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorization"> (optional)</param>
         /// <param name="item"> (optional)</param>
-        /// <returns></returns>
-        void ApiUserPost (string authorization = null, User item = null);
+        /// <returns>User</returns>
+        User ApiUserPost (string authorization = null, User item = null);
 
         /// <summary>
         /// 
@@ -137,8 +137,8 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorization"> (optional)</param>
         /// <param name="item"> (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> ApiUserPostWithHttpInfo (string authorization = null, User item = null);
+        /// <returns>ApiResponse of User</returns>
+        ApiResponse<User> ApiUserPostWithHttpInfo (string authorization = null, User item = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -173,8 +173,8 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="name"></param>
         /// <param name="authorization"> (optional)</param>
-        /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ApiUserByNameGetAsync (string name, string authorization = null);
+        /// <returns>Task of User</returns>
+        System.Threading.Tasks.Task<User> ApiUserByNameGetAsync (string name, string authorization = null);
 
         /// <summary>
         /// 
@@ -185,8 +185,8 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="name"></param>
         /// <param name="authorization"> (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ApiUserByNameGetAsyncWithHttpInfo (string name, string authorization = null);
+        /// <returns>Task of ApiResponse (User)</returns>
+        System.Threading.Tasks.Task<ApiResponse<User>> ApiUserByNameGetAsyncWithHttpInfo (string name, string authorization = null);
         /// <summary>
         /// 
         /// </summary>
@@ -242,8 +242,8 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorization"> (optional)</param>
         /// <param name="item"> (optional)</param>
-        /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ApiUserPostAsync (string authorization = null, User item = null);
+        /// <returns>Task of User</returns>
+        System.Threading.Tasks.Task<User> ApiUserPostAsync (string authorization = null, User item = null);
 
         /// <summary>
         /// 
@@ -254,8 +254,8 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorization"> (optional)</param>
         /// <param name="item"> (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ApiUserPostAsyncWithHttpInfo (string authorization = null, User item = null);
+        /// <returns>Task of ApiResponse (User)</returns>
+        System.Threading.Tasks.Task<ApiResponse<User>> ApiUserPostAsyncWithHttpInfo (string authorization = null, User item = null);
         #endregion Asynchronous Operations
     }
 
@@ -517,10 +517,11 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="name"></param>
         /// <param name="authorization"> (optional)</param>
-        /// <returns></returns>
-        public void ApiUserByNameGet (string name, string authorization = null)
+        /// <returns>User</returns>
+        public User ApiUserByNameGet (string name, string authorization = null)
         {
-             ApiUserByNameGetWithHttpInfo(name, authorization);
+             ApiResponse<User> localVarResponse = ApiUserByNameGetWithHttpInfo(name, authorization);
+             return localVarResponse.Data;
         }
 
         /// <summary>
@@ -529,8 +530,8 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="name"></param>
         /// <param name="authorization"> (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> ApiUserByNameGetWithHttpInfo (string name, string authorization = null)
+        /// <returns>ApiResponse of User</returns>
+        public ApiResponse< User > ApiUserByNameGetWithHttpInfo (string name, string authorization = null)
         {
             // verify the required parameter 'name' is set
             if (name == null)
@@ -551,6 +552,9 @@ namespace IO.Swagger.Api
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain", 
+                "application/json", 
+                "text/json"
             };
             String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -576,10 +580,10 @@ namespace IO.Swagger.Api
                 if (exception != null) throw exception;
             }
 
-            
-            return new ApiResponse<Object>(localVarStatusCode,
+            return new ApiResponse<User>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
+                (User) Configuration.ApiClient.Deserialize(localVarResponse, typeof(User)));
+            
         }
 
         /// <summary>
@@ -588,10 +592,11 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="name"></param>
         /// <param name="authorization"> (optional)</param>
-        /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ApiUserByNameGetAsync (string name, string authorization = null)
+        /// <returns>Task of User</returns>
+        public async System.Threading.Tasks.Task<User> ApiUserByNameGetAsync (string name, string authorization = null)
         {
-             await ApiUserByNameGetAsyncWithHttpInfo(name, authorization);
+             ApiResponse<User> localVarResponse = await ApiUserByNameGetAsyncWithHttpInfo(name, authorization);
+             return localVarResponse.Data;
 
         }
 
@@ -601,8 +606,8 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="name"></param>
         /// <param name="authorization"> (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> ApiUserByNameGetAsyncWithHttpInfo (string name, string authorization = null)
+        /// <returns>Task of ApiResponse (User)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<User>> ApiUserByNameGetAsyncWithHttpInfo (string name, string authorization = null)
         {
             // verify the required parameter 'name' is set
             if (name == null)
@@ -623,6 +628,9 @@ namespace IO.Swagger.Api
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain", 
+                "application/json", 
+                "text/json"
             };
             String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -648,10 +656,10 @@ namespace IO.Swagger.Api
                 if (exception != null) throw exception;
             }
 
-            
-            return new ApiResponse<Object>(localVarStatusCode,
+            return new ApiResponse<User>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
+                (User) Configuration.ApiClient.Deserialize(localVarResponse, typeof(User)));
+            
         }
 
         /// <summary>
@@ -968,10 +976,11 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorization"> (optional)</param>
         /// <param name="item"> (optional)</param>
-        /// <returns></returns>
-        public void ApiUserPost (string authorization = null, User item = null)
+        /// <returns>User</returns>
+        public User ApiUserPost (string authorization = null, User item = null)
         {
-             ApiUserPostWithHttpInfo(authorization, item);
+             ApiResponse<User> localVarResponse = ApiUserPostWithHttpInfo(authorization, item);
+             return localVarResponse.Data;
         }
 
         /// <summary>
@@ -980,8 +989,8 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorization"> (optional)</param>
         /// <param name="item"> (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> ApiUserPostWithHttpInfo (string authorization = null, User item = null)
+        /// <returns>ApiResponse of User</returns>
+        public ApiResponse< User > ApiUserPostWithHttpInfo (string authorization = null, User item = null)
         {
 
             var localVarPath = "/api/User";
@@ -1002,6 +1011,9 @@ namespace IO.Swagger.Api
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain", 
+                "application/json", 
+                "text/json"
             };
             String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -1034,10 +1046,10 @@ namespace IO.Swagger.Api
                 if (exception != null) throw exception;
             }
 
-            
-            return new ApiResponse<Object>(localVarStatusCode,
+            return new ApiResponse<User>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
+                (User) Configuration.ApiClient.Deserialize(localVarResponse, typeof(User)));
+            
         }
 
         /// <summary>
@@ -1046,10 +1058,11 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorization"> (optional)</param>
         /// <param name="item"> (optional)</param>
-        /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ApiUserPostAsync (string authorization = null, User item = null)
+        /// <returns>Task of User</returns>
+        public async System.Threading.Tasks.Task<User> ApiUserPostAsync (string authorization = null, User item = null)
         {
-             await ApiUserPostAsyncWithHttpInfo(authorization, item);
+             ApiResponse<User> localVarResponse = await ApiUserPostAsyncWithHttpInfo(authorization, item);
+             return localVarResponse.Data;
 
         }
 
@@ -1059,8 +1072,8 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorization"> (optional)</param>
         /// <param name="item"> (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> ApiUserPostAsyncWithHttpInfo (string authorization = null, User item = null)
+        /// <returns>Task of ApiResponse (User)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<User>> ApiUserPostAsyncWithHttpInfo (string authorization = null, User item = null)
         {
 
             var localVarPath = "/api/User";
@@ -1081,6 +1094,9 @@ namespace IO.Swagger.Api
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain", 
+                "application/json", 
+                "text/json"
             };
             String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -1113,10 +1129,10 @@ namespace IO.Swagger.Api
                 if (exception != null) throw exception;
             }
 
-            
-            return new ApiResponse<Object>(localVarStatusCode,
+            return new ApiResponse<User>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
+                (User) Configuration.ApiClient.Deserialize(localVarResponse, typeof(User)));
+            
         }
 
     }

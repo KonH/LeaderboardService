@@ -131,8 +131,8 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
         /// <param name="authorization"> (optional)</param>
-        /// <returns></returns>
-        void ApiScoreByIdGet (string id, string authorization = null);
+        /// <returns>ScoreItem</returns>
+        ScoreItem ApiScoreByIdGet (string id, string authorization = null);
 
         /// <summary>
         /// 
@@ -143,8 +143,8 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
         /// <param name="authorization"> (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> ApiScoreByIdGetWithHttpInfo (string id, string authorization = null);
+        /// <returns>ApiResponse of ScoreItem</returns>
+        ApiResponse<ScoreItem> ApiScoreByIdGetWithHttpInfo (string id, string authorization = null);
         /// <summary>
         /// 
         /// </summary>
@@ -200,8 +200,8 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorization"> (optional)</param>
         /// <param name="item"> (optional)</param>
-        /// <returns></returns>
-        void ApiScorePost (string authorization = null, ScoreItem item = null);
+        /// <returns>ScoreItem</returns>
+        ScoreItem ApiScorePost (string authorization = null, ScoreItem item = null);
 
         /// <summary>
         /// 
@@ -212,8 +212,8 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorization"> (optional)</param>
         /// <param name="item"> (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> ApiScorePostWithHttpInfo (string authorization = null, ScoreItem item = null);
+        /// <returns>ApiResponse of ScoreItem</returns>
+        ApiResponse<ScoreItem> ApiScorePostWithHttpInfo (string authorization = null, ScoreItem item = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -323,8 +323,8 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
         /// <param name="authorization"> (optional)</param>
-        /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ApiScoreByIdGetAsync (string id, string authorization = null);
+        /// <returns>Task of ScoreItem</returns>
+        System.Threading.Tasks.Task<ScoreItem> ApiScoreByIdGetAsync (string id, string authorization = null);
 
         /// <summary>
         /// 
@@ -335,8 +335,8 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
         /// <param name="authorization"> (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ApiScoreByIdGetAsyncWithHttpInfo (string id, string authorization = null);
+        /// <returns>Task of ApiResponse (ScoreItem)</returns>
+        System.Threading.Tasks.Task<ApiResponse<ScoreItem>> ApiScoreByIdGetAsyncWithHttpInfo (string id, string authorization = null);
         /// <summary>
         /// 
         /// </summary>
@@ -392,8 +392,8 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorization"> (optional)</param>
         /// <param name="item"> (optional)</param>
-        /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ApiScorePostAsync (string authorization = null, ScoreItem item = null);
+        /// <returns>Task of ScoreItem</returns>
+        System.Threading.Tasks.Task<ScoreItem> ApiScorePostAsync (string authorization = null, ScoreItem item = null);
 
         /// <summary>
         /// 
@@ -404,8 +404,8 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorization"> (optional)</param>
         /// <param name="item"> (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ApiScorePostAsyncWithHttpInfo (string authorization = null, ScoreItem item = null);
+        /// <returns>Task of ApiResponse (ScoreItem)</returns>
+        System.Threading.Tasks.Task<ApiResponse<ScoreItem>> ApiScorePostAsyncWithHttpInfo (string authorization = null, ScoreItem item = null);
         #endregion Asynchronous Operations
     }
 
@@ -1156,10 +1156,11 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
         /// <param name="authorization"> (optional)</param>
-        /// <returns></returns>
-        public void ApiScoreByIdGet (string id, string authorization = null)
+        /// <returns>ScoreItem</returns>
+        public ScoreItem ApiScoreByIdGet (string id, string authorization = null)
         {
-             ApiScoreByIdGetWithHttpInfo(id, authorization);
+             ApiResponse<ScoreItem> localVarResponse = ApiScoreByIdGetWithHttpInfo(id, authorization);
+             return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1168,8 +1169,8 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
         /// <param name="authorization"> (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> ApiScoreByIdGetWithHttpInfo (string id, string authorization = null)
+        /// <returns>ApiResponse of ScoreItem</returns>
+        public ApiResponse< ScoreItem > ApiScoreByIdGetWithHttpInfo (string id, string authorization = null)
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -1190,6 +1191,9 @@ namespace IO.Swagger.Api
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain", 
+                "application/json", 
+                "text/json"
             };
             String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -1215,10 +1219,10 @@ namespace IO.Swagger.Api
                 if (exception != null) throw exception;
             }
 
-            
-            return new ApiResponse<Object>(localVarStatusCode,
+            return new ApiResponse<ScoreItem>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
+                (ScoreItem) Configuration.ApiClient.Deserialize(localVarResponse, typeof(ScoreItem)));
+            
         }
 
         /// <summary>
@@ -1227,10 +1231,11 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
         /// <param name="authorization"> (optional)</param>
-        /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ApiScoreByIdGetAsync (string id, string authorization = null)
+        /// <returns>Task of ScoreItem</returns>
+        public async System.Threading.Tasks.Task<ScoreItem> ApiScoreByIdGetAsync (string id, string authorization = null)
         {
-             await ApiScoreByIdGetAsyncWithHttpInfo(id, authorization);
+             ApiResponse<ScoreItem> localVarResponse = await ApiScoreByIdGetAsyncWithHttpInfo(id, authorization);
+             return localVarResponse.Data;
 
         }
 
@@ -1240,8 +1245,8 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
         /// <param name="authorization"> (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> ApiScoreByIdGetAsyncWithHttpInfo (string id, string authorization = null)
+        /// <returns>Task of ApiResponse (ScoreItem)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<ScoreItem>> ApiScoreByIdGetAsyncWithHttpInfo (string id, string authorization = null)
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -1262,6 +1267,9 @@ namespace IO.Swagger.Api
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain", 
+                "application/json", 
+                "text/json"
             };
             String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -1287,10 +1295,10 @@ namespace IO.Swagger.Api
                 if (exception != null) throw exception;
             }
 
-            
-            return new ApiResponse<Object>(localVarStatusCode,
+            return new ApiResponse<ScoreItem>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
+                (ScoreItem) Configuration.ApiClient.Deserialize(localVarResponse, typeof(ScoreItem)));
+            
         }
 
         /// <summary>
@@ -1607,10 +1615,11 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorization"> (optional)</param>
         /// <param name="item"> (optional)</param>
-        /// <returns></returns>
-        public void ApiScorePost (string authorization = null, ScoreItem item = null)
+        /// <returns>ScoreItem</returns>
+        public ScoreItem ApiScorePost (string authorization = null, ScoreItem item = null)
         {
-             ApiScorePostWithHttpInfo(authorization, item);
+             ApiResponse<ScoreItem> localVarResponse = ApiScorePostWithHttpInfo(authorization, item);
+             return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1619,8 +1628,8 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorization"> (optional)</param>
         /// <param name="item"> (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> ApiScorePostWithHttpInfo (string authorization = null, ScoreItem item = null)
+        /// <returns>ApiResponse of ScoreItem</returns>
+        public ApiResponse< ScoreItem > ApiScorePostWithHttpInfo (string authorization = null, ScoreItem item = null)
         {
 
             var localVarPath = "/api/Score";
@@ -1641,6 +1650,9 @@ namespace IO.Swagger.Api
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain", 
+                "application/json", 
+                "text/json"
             };
             String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -1673,10 +1685,10 @@ namespace IO.Swagger.Api
                 if (exception != null) throw exception;
             }
 
-            
-            return new ApiResponse<Object>(localVarStatusCode,
+            return new ApiResponse<ScoreItem>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
+                (ScoreItem) Configuration.ApiClient.Deserialize(localVarResponse, typeof(ScoreItem)));
+            
         }
 
         /// <summary>
@@ -1685,10 +1697,11 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorization"> (optional)</param>
         /// <param name="item"> (optional)</param>
-        /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ApiScorePostAsync (string authorization = null, ScoreItem item = null)
+        /// <returns>Task of ScoreItem</returns>
+        public async System.Threading.Tasks.Task<ScoreItem> ApiScorePostAsync (string authorization = null, ScoreItem item = null)
         {
-             await ApiScorePostAsyncWithHttpInfo(authorization, item);
+             ApiResponse<ScoreItem> localVarResponse = await ApiScorePostAsyncWithHttpInfo(authorization, item);
+             return localVarResponse.Data;
 
         }
 
@@ -1698,8 +1711,8 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorization"> (optional)</param>
         /// <param name="item"> (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> ApiScorePostAsyncWithHttpInfo (string authorization = null, ScoreItem item = null)
+        /// <returns>Task of ApiResponse (ScoreItem)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<ScoreItem>> ApiScorePostAsyncWithHttpInfo (string authorization = null, ScoreItem item = null)
         {
 
             var localVarPath = "/api/Score";
@@ -1720,6 +1733,9 @@ namespace IO.Swagger.Api
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain", 
+                "application/json", 
+                "text/json"
             };
             String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -1752,10 +1768,10 @@ namespace IO.Swagger.Api
                 if (exception != null) throw exception;
             }
 
-            
-            return new ApiResponse<Object>(localVarStatusCode,
+            return new ApiResponse<ScoreItem>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
+                (ScoreItem) Configuration.ApiClient.Deserialize(localVarResponse, typeof(ScoreItem)));
+            
         }
 
     }

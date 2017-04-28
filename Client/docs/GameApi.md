@@ -73,7 +73,7 @@ No authorization required
 
 <a name="apigamebynameget"></a>
 # **ApiGameByNameGet**
-> void ApiGameByNameGet (string name, string authorization = null)
+> User ApiGameByNameGet (string name, string authorization = null)
 
 
 
@@ -98,7 +98,8 @@ namespace Example
 
             try
             {
-                apiInstance.ApiGameByNameGet(name, authorization);
+                User result = apiInstance.ApiGameByNameGet(name, authorization);
+                Debug.WriteLine(result);
             }
             catch (Exception e)
             {
@@ -118,7 +119,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**User**](User.md)
 
 ### Authorization
 
@@ -127,7 +128,7 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: text/plain, application/json, text/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -254,7 +255,7 @@ No authorization required
 
 <a name="apigamepost"></a>
 # **ApiGamePost**
-> void ApiGamePost (string authorization = null, Game item = null)
+> User ApiGamePost (string authorization = null, Game item = null)
 
 
 
@@ -279,7 +280,8 @@ namespace Example
 
             try
             {
-                apiInstance.ApiGamePost(authorization, item);
+                User result = apiInstance.ApiGamePost(authorization, item);
+                Debug.WriteLine(result);
             }
             catch (Exception e)
             {
@@ -299,7 +301,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**User**](User.md)
 
 ### Authorization
 
@@ -308,7 +310,7 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: application/json, text/json, application/json-patch+json
- - **Accept**: Not defined
+ - **Accept**: text/plain, application/json, text/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

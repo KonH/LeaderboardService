@@ -265,7 +265,7 @@ No authorization required
 
 <a name="apiscorebyidget"></a>
 # **ApiScoreByIdGet**
-> void ApiScoreByIdGet (string id, string authorization = null)
+> ScoreItem ApiScoreByIdGet (string id, string authorization = null)
 
 
 
@@ -290,7 +290,8 @@ namespace Example
 
             try
             {
-                apiInstance.ApiScoreByIdGet(id, authorization);
+                ScoreItem result = apiInstance.ApiScoreByIdGet(id, authorization);
+                Debug.WriteLine(result);
             }
             catch (Exception e)
             {
@@ -310,7 +311,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**ScoreItem**](ScoreItem.md)
 
 ### Authorization
 
@@ -319,7 +320,7 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: text/plain, application/json, text/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -446,7 +447,7 @@ No authorization required
 
 <a name="apiscorepost"></a>
 # **ApiScorePost**
-> void ApiScorePost (string authorization = null, ScoreItem item = null)
+> ScoreItem ApiScorePost (string authorization = null, ScoreItem item = null)
 
 
 
@@ -471,7 +472,8 @@ namespace Example
 
             try
             {
-                apiInstance.ApiScorePost(authorization, item);
+                ScoreItem result = apiInstance.ApiScorePost(authorization, item);
+                Debug.WriteLine(result);
             }
             catch (Exception e)
             {
@@ -491,7 +493,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**ScoreItem**](ScoreItem.md)
 
 ### Authorization
 
@@ -500,7 +502,7 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: application/json, text/json, application/json-patch+json
- - **Accept**: Not defined
+ - **Accept**: text/plain, application/json, text/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
