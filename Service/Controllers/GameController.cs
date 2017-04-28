@@ -30,6 +30,7 @@ namespace LeaderboardService.Controllers
 		}
 
 		[HttpGet("{name}", Name = "GetGame")]
+		[ProducesResponseType(typeof(User), 200)]
 		public IActionResult GetByName([FromBasicAuth] string auth, string name)
 		{
 			if (!Auth.IsAllowed(auth, name, UserPermission.ReadGames))
@@ -45,6 +46,7 @@ namespace LeaderboardService.Controllers
 		}
 
 		[HttpPost]
+		[ProducesResponseType(typeof(User), 201)]
 		public IActionResult Create([FromBasicAuth] string auth, [FromBody] Game item)
 		{
 			if ( item == null )

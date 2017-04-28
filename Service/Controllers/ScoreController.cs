@@ -35,6 +35,7 @@ namespace LeaderboardService.Controllers
 		}
 
 		[HttpGet("{id}", Name = "GetScore")]
+		[ProducesResponseType(typeof(ScoreItem), 200)]
 		public IActionResult GetById([FromBasicAuth] string auth, string id)
 		{
 			var item = ScoreItems.Find(id);
@@ -53,6 +54,7 @@ namespace LeaderboardService.Controllers
 		}
 
 		[HttpPost]
+		[ProducesResponseType(typeof(ScoreItem), 201)]
 		public IActionResult Create([FromBasicAuth] string auth, [FromBody] ScoreItem item)
 		{
 			if (item == null)
