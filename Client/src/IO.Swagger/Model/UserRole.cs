@@ -37,12 +37,6 @@ namespace IO.Swagger.Model
         {
             
             /// <summary>
-            /// Enum NUMBER_0 for 0
-            /// </summary>
-            [EnumMember(Value = "0")]
-            NUMBER_0 = 0,
-            
-            /// <summary>
             /// Enum NUMBER_1 for 1
             /// </summary>
             [EnumMember(Value = "1")]
@@ -55,40 +49,46 @@ namespace IO.Swagger.Model
             NUMBER_2 = 2,
             
             /// <summary>
-            /// Enum NUMBER_3 for 3
-            /// </summary>
-            [EnumMember(Value = "3")]
-            NUMBER_3 = 3,
-            
-            /// <summary>
             /// Enum NUMBER_4 for 4
             /// </summary>
             [EnumMember(Value = "4")]
             NUMBER_4 = 4,
             
             /// <summary>
-            /// Enum NUMBER_5 for 5
-            /// </summary>
-            [EnumMember(Value = "5")]
-            NUMBER_5 = 5,
-            
-            /// <summary>
-            /// Enum NUMBER_6 for 6
-            /// </summary>
-            [EnumMember(Value = "6")]
-            NUMBER_6 = 6,
-            
-            /// <summary>
-            /// Enum NUMBER_7 for 7
-            /// </summary>
-            [EnumMember(Value = "7")]
-            NUMBER_7 = 7,
-            
-            /// <summary>
             /// Enum NUMBER_8 for 8
             /// </summary>
             [EnumMember(Value = "8")]
-            NUMBER_8 = 8
+            NUMBER_8 = 8,
+            
+            /// <summary>
+            /// Enum NUMBER_16 for 16
+            /// </summary>
+            [EnumMember(Value = "16")]
+            NUMBER_16 = 16,
+            
+            /// <summary>
+            /// Enum NUMBER_32 for 32
+            /// </summary>
+            [EnumMember(Value = "32")]
+            NUMBER_32 = 32,
+            
+            /// <summary>
+            /// Enum NUMBER_64 for 64
+            /// </summary>
+            [EnumMember(Value = "64")]
+            NUMBER_64 = 64,
+            
+            /// <summary>
+            /// Enum NUMBER_128 for 128
+            /// </summary>
+            [EnumMember(Value = "128")]
+            NUMBER_128 = 128,
+            
+            /// <summary>
+            /// Enum NUMBER_256 for 256
+            /// </summary>
+            [EnumMember(Value = "256")]
+            NUMBER_256 = 256
         }
 
         /// <summary>
