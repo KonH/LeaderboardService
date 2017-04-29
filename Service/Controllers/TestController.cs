@@ -33,7 +33,7 @@ namespace LeaderboardService.Controllers
 			{
 				Games.Remove(game.Name);
 			}
-			var scores = Scores.GetAll().ToArray();
+			var scores = Scores.GetAll(int.MaxValue).ToArray();
 			foreach(var score in scores)
 			{
 				Scores.Remove(score.Key);

@@ -15,9 +15,12 @@ namespace LeaderboardService.Repositories
 		{
 		}
 
-		public IEnumerable<ScoreItem> GetAll(string game = null, string param = null, string version = null)
+		public IEnumerable<ScoreItem> GetAll(int max, string game = null, string param = null, string version = null)
 		{
-			return _scores.Values.Where(item => IsWantedItem(item, game, param, version));
+			return _scores.Values.
+				Where(item => IsWantedItem(item, game, param, version)).
+				Take(max).
+				OrderByDescending(item => item.Score);
 		}
 
 		bool IsWantedItem(ScoreItem item, string game, string param, string version) 
