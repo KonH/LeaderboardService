@@ -44,8 +44,8 @@ namespace LeaderboardService.Managers
 
 		bool Forbidden()
 		{
-			Result = new ForbidResult();
 			StatusCode = 403;
+			Result = new StatusCodeResult(StatusCode);
 			return false;
 		}
 
@@ -92,7 +92,10 @@ namespace LeaderboardService.Managers
 
 		UserRole FindRole(User user, string game) 
 		{
-			return user.Roles.FirstOrDefault(role => ((role.Game == null) || (role.Game == game)));
+			return
+				(user != null) && (user.Roles != null) ?
+				user.Roles.FirstOrDefault(role => ((role.Game == null) || (role.Game == game))) :
+				null;
 		}
 
 		bool HasPermission(UserRole role, UserPermission permission) 

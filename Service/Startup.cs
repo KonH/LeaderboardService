@@ -1,7 +1,9 @@
 using LeaderboardService.Managers;
 using LeaderboardService.Repositories;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace LeaderboardService
 {
@@ -9,7 +11,6 @@ namespace LeaderboardService
 	{
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddAuthorization();
 			services.AddMvc();
 			services.AddLogging();
 			services.AddSingleton<IScoreRepository, InMemoryScoreRepository>();
@@ -19,11 +20,12 @@ namespace LeaderboardService
 			services.AddSwaggerGen();
     	}
 
-		public void Configure(IApplicationBuilder app)
+		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
 		{
 			app.UseMvcWithDefaultRoute();
 			app.UseSwagger();
 			app.UseSwaggerUi();
+			loggerFactory.AddConsole().AddDebug();
 		}
 	}
 }

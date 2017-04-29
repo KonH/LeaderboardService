@@ -10,6 +10,7 @@ namespace IO.Swagger.Test {
 		public const string OtherAuth = "Basic YWRtaW5qcDtqazphZG1pbg==";
 		public const int NeedAuthCode = 401;
 		public const int ForbiddenCode = 403;
+		public const int NotFoundCode = 404;
 		public const string UserName = "user";
 		public const string AdminName = "admin";
 		public const string GameName = "Game";
@@ -35,7 +36,7 @@ namespace IO.Swagger.Test {
 
 		public static string GetAuthHeader(string username, string password)
 		{
-			return Convert.ToBase64String(ASCIIEncoding.ASCII.GetBytes(username + ":" + password));
+			return "Basic " + Convert.ToBase64String(ASCIIEncoding.ASCII.GetBytes(username + ":" + password));
 		}
 	}
 }

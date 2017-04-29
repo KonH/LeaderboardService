@@ -77,7 +77,8 @@ namespace IO.Swagger.Test
 
 			instance.ApiUserByNameDelete(name, authorization);
 
-			Assert.IsNull(instance.ApiUserByNameGet(name, authorization));
+			var ex2 = Assert.Catch(() => instance.ApiUserByNameGet(name, authorization)) as ApiException;
+			Assert.AreEqual(Common.NotFoundCode, ex2.ErrorCode);
         }
 
 		/// <summary>
@@ -87,7 +88,7 @@ namespace IO.Swagger.Test
 		public void ApiUserByNameDeleteTestWithNoRights() {
 			string name = Common.UserName;
 			string checkAuthorization = Common.AdminAuth;
-			string authorization = Common.UserName;
+			string authorization = Common.UserAuth;
 
 			Assert.IsNotNull(instance.ApiUserByNameGet(name, checkAuthorization));
 
@@ -167,11 +168,11 @@ namespace IO.Swagger.Test
 		[Test]
 		public void ApiUserByNamePatchTestWithNoRights() {
 			string name = Common.UserName;
-			string authorization = Common.UserName;
+			string authorization = Common.UserAuth;
 			var newName = name + "123";
 			User item = new User(newName, Common.UserName);
 			var ex = Assert.Catch(() => instance.ApiUserByNamePatch(name, authorization, item)) as ApiException;
-			Assert.AreEqual(Common.NeedAuthCode, ex.ErrorCode);
+			Assert.AreEqual(Common.ForbiddenCode, ex.ErrorCode);
 		}
 
 		/// <summary>
@@ -184,7 +185,7 @@ namespace IO.Swagger.Test
 			var newName = name + "123";
 			User item = new User(newName, Common.UserName);
 			var ex = Assert.Catch(() => instance.ApiUserByNamePatch(name, authorization, item)) as ApiException;
-			Assert.AreEqual(Common.ForbiddenCode, ex.ErrorCode);
+			Assert.AreEqual(Common.NeedAuthCode, ex.ErrorCode);
 		}
 
 		/// <summary>
@@ -246,7 +247,8 @@ namespace IO.Swagger.Test
 			var ex = Assert.Catch(() => instance.ApiUserPost(authorization, item)) as ApiException;
 			Assert.AreEqual(Common.ForbiddenCode, ex.ErrorCode);
 
-			Assert.IsNull(instance.ApiUserByNameGet(userName, checkAuthorization));
+			var ex2 = Assert.Catch(() => instance.ApiUserByNameGet(userName, checkAuthorization)) as ApiException;
+			Assert.AreEqual(Common.NotFoundCode, ex2.ErrorCode);
 		}
 
 		/// <summary>
@@ -262,7 +264,8 @@ namespace IO.Swagger.Test
 			var ex = Assert.Catch(() => instance.ApiUserPost(authorization, item)) as ApiException;
 			Assert.AreEqual(Common.NeedAuthCode, ex.ErrorCode);
 
-			Assert.IsNull(instance.ApiUserByNameGet(userName, checkAuthorization));
+			var ex2 = Assert.Catch(() => instance.ApiUserByNameGet(userName, checkAuthorization)) as ApiException;
+			Assert.AreEqual(Common.NotFoundCode, ex2.ErrorCode);
 		}
 
 		/// <summary>
@@ -300,8 +303,7 @@ namespace IO.Swagger.Test
 
 			var newUserAuth = Common.GetAuthHeader(userName, userName);
 
-			var ex = Assert.Catch(() => instance.ApiUserGet(newUserAuth)) as ApiException;
-			Assert.AreEqual(Common.ForbiddenCode, ex.ErrorCode);
+			instance.ApiUserGet(newUserAuth);
 		}
 	}
 
