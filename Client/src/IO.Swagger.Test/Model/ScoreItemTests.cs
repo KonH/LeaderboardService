@@ -32,8 +32,7 @@ namespace IO.Swagger.Test
     [TestFixture]
     public class ScoreItemTests
     {
-        // TODO uncomment below to declare an instance variable for ScoreItem
-        //private ScoreItem instance;
+        private ScoreItem instance;
 
         /// <summary>
         /// Setup before each test
@@ -41,8 +40,7 @@ namespace IO.Swagger.Test
         [SetUp]
         public void Init()
         {
-            // TODO uncomment below to create an instance of ScoreItem
-            //instance = new ScoreItem();
+            instance = new ScoreItem();
         }
 
         /// <summary>
@@ -60,8 +58,7 @@ namespace IO.Swagger.Test
         [Test]
         public void ScoreItemInstanceTest()
         {
-            // TODO uncomment below to test "IsInstanceOfType" ScoreItem
-            //Assert.IsInstanceOfType<ScoreItem> (instance, "variable 'instance' is a ScoreItem");
+            Assert.IsInstanceOf<ScoreItem>(instance, "variable 'instance' is a ScoreItem");
         }
 
         /// <summary>
@@ -70,7 +67,9 @@ namespace IO.Swagger.Test
         [Test]
         public void KeyTest()
         {
-            // TODO unit test for the property 'Key'
+			var newKey = "newKey";
+			instance.Key = newKey;
+			Assert.AreEqual(newKey, instance.Key);
         }
         /// <summary>
         /// Test the property 'Game'
@@ -78,32 +77,40 @@ namespace IO.Swagger.Test
         [Test]
         public void GameTest()
         {
-            // TODO unit test for the property 'Game'
-        }
+			var newGame = "newGame";
+			instance.Game = newGame;
+			Assert.AreEqual(newGame, instance.Game);
+		}
         /// <summary>
         /// Test the property 'Version'
         /// </summary>
         [Test]
         public void VersionTest()
         {
-            // TODO unit test for the property 'Version'
-        }
+			var newVersion = "newVersion";
+			instance.Version = newVersion;
+			Assert.AreEqual(newVersion, instance.Version);
+		}
         /// <summary>
         /// Test the property 'Param'
         /// </summary>
         [Test]
         public void ParamTest()
         {
-            // TODO unit test for the property 'Param'
-        }
+			var newParam = "newParam";
+			instance.Param = newParam;
+			Assert.AreEqual(newParam, instance.Param);
+		}
         /// <summary>
         /// Test the property 'Score'
         /// </summary>
         [Test]
         public void ScoreTest()
         {
-            // TODO unit test for the property 'Score'
-        }
+			var newScore = 999;
+			instance.Score = newScore;
+			Assert.AreEqual(newScore, instance.Score);
+		}
 
     }
 

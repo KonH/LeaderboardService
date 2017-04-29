@@ -32,8 +32,7 @@ namespace IO.Swagger.Test
     [TestFixture]
     public class GameTests
     {
-        // TODO uncomment below to declare an instance variable for Game
-        //private Game instance;
+        private Game instance;
 
         /// <summary>
         /// Setup before each test
@@ -41,8 +40,7 @@ namespace IO.Swagger.Test
         [SetUp]
         public void Init()
         {
-            // TODO uncomment below to create an instance of Game
-            //instance = new Game();
+            instance = new Game();
         }
 
         /// <summary>
@@ -60,8 +58,7 @@ namespace IO.Swagger.Test
         [Test]
         public void GameInstanceTest()
         {
-            // TODO uncomment below to test "IsInstanceOfType" Game
-            //Assert.IsInstanceOfType<Game> (instance, "variable 'instance' is a Game");
+            Assert.IsInstanceOf<Game>(instance, "variable 'instance' is a Game");
         }
 
         /// <summary>
@@ -70,7 +67,9 @@ namespace IO.Swagger.Test
         [Test]
         public void NameTest()
         {
-            // TODO unit test for the property 'Name'
+			var newName = "NewName";
+			instance.Name = newName;
+			Assert.AreEqual(newName, instance.Name);
         }
 
     }

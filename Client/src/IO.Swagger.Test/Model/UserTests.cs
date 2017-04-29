@@ -32,8 +32,7 @@ namespace IO.Swagger.Test
     [TestFixture]
     public class UserTests
     {
-        // TODO uncomment below to declare an instance variable for User
-        //private User instance;
+        private User instance;
 
         /// <summary>
         /// Setup before each test
@@ -41,8 +40,7 @@ namespace IO.Swagger.Test
         [SetUp]
         public void Init()
         {
-            // TODO uncomment below to create an instance of User
-            //instance = new User();
+            instance = new User();
         }
 
         /// <summary>
@@ -60,8 +58,7 @@ namespace IO.Swagger.Test
         [Test]
         public void UserInstanceTest()
         {
-            // TODO uncomment below to test "IsInstanceOfType" User
-            //Assert.IsInstanceOfType<User> (instance, "variable 'instance' is a User");
+            Assert.IsInstanceOf<User>(instance, "variable 'instance' is a User");
         }
 
         /// <summary>
@@ -70,23 +67,30 @@ namespace IO.Swagger.Test
         [Test]
         public void NameTest()
         {
-            // TODO unit test for the property 'Name'
-        }
+			var newName = "NewName";
+			instance.Name = newName;
+			Assert.AreEqual(newName, instance.Name);
+
+		}
         /// <summary>
         /// Test the property 'Password'
         /// </summary>
         [Test]
         public void PasswordTest()
         {
-            // TODO unit test for the property 'Password'
-        }
+			var newPassword = "newPass";
+			instance.Password = newPassword;
+			Assert.AreEqual(newPassword, instance.Password);
+		}
         /// <summary>
         /// Test the property 'Roles'
         /// </summary>
         [Test]
         public void RolesTest()
         {
-            // TODO unit test for the property 'Roles'
+			var newRoles = new List<UserRole>();
+			instance.Roles = newRoles;
+			Assert.AreEqual(newRoles, instance.Roles);
         }
 
     }

@@ -60,8 +60,7 @@ namespace IO.Swagger.Test
         [Test]
         public void InstanceTest()
         {
-            // TODO uncomment below to test 'IsInstanceOfType' GameApi
-            //Assert.IsInstanceOfType(typeof(GameApi), instance, "instance is a GameApi");
+            Assert.IsInstanceOf(typeof(GameApi), instance, "instance is a GameApi");
         }
 
         
@@ -69,67 +68,171 @@ namespace IO.Swagger.Test
         /// Test ApiGameByNameDelete
         /// </summary>
         [Test]
-        public void ApiGameByNameDeleteTest()
+        public void ApiGameByNameDeleteTestWithRights()
         {
-            // TODO uncomment below to test the method and replace null with proper value
-            //string name = null;
-            //string authorization = null;
-            //instance.ApiGameByNameDelete(name, authorization);
-            
+            string name = Common.GameName;
+            string authorization = Common.AdminAuth;
+
+			instance.ApiGameByNameDelete(name, authorization);
+
+			var ex = Assert.Catch(() => instance.ApiGameByNameGet(name, authorization)) as ApiException;
+			Assert.AreEqual(Common.NotFoundCode, ex.ErrorCode);
         }
-        
-        /// <summary>
-        /// Test ApiGameByNameGet
-        /// </summary>
-        [Test]
-        public void ApiGameByNameGetTest()
+
+		/// <summary>
+		/// Test ApiGameByNameDelete
+		/// </summary>
+		[Test]
+		public void ApiGameByNameDeleteTestWithNoRights()
+		{
+			string name = Common.GameName;
+			string authorization = Common.UserAuth;
+			string chechAuthorization = Common.AdminAuth;
+
+			var ex = Assert.Catch(() => instance.ApiGameByNameDelete(name, authorization)) as ApiException;
+			Assert.AreEqual(Common.ForbiddenCode, ex.ErrorCode);
+
+			var game = instance.ApiGameByNameGet(name, chechAuthorization);
+			Assert.IsNotNull(game);
+		}
+
+		/// <summary>
+		/// Test ApiGameByNameDelete
+		/// </summary>
+		[Test]
+		public void ApiGameByNameDeleteTestWithBadRights()
+		{
+			string name = Common.GameName;
+			string authorization = Common.OtherAuth;
+			string chechAuthorization = Common.AdminAuth;
+
+			var ex = Assert.Catch(() => instance.ApiGameByNameDelete(name, authorization)) as ApiException;
+			Assert.AreEqual(Common.NeedAuthCode, ex.ErrorCode);
+
+			var game = instance.ApiGameByNameGet(name, chechAuthorization);
+			Assert.IsNotNull(game);
+		}
+
+		/// <summary>
+		/// Test ApiGameByNameGet
+		/// </summary>
+		[Test]
+        public void ApiGameByNameGetTestWithRights()
         {
-            // TODO uncomment below to test the method and replace null with proper value
-            //string name = null;
-            //string authorization = null;
-            //instance.ApiGameByNameGet(name, authorization);
-            
+            string name = Common.GameName;
+            string authorization = Common.AdminAuth;
+            var game = instance.ApiGameByNameGet(name, authorization);
+			Assert.AreEqual(Common.GameName, game.Name);
         }
-        
-        /// <summary>
-        /// Test ApiGameByNamePatch
-        /// </summary>
-        [Test]
-        public void ApiGameByNamePatchTest()
-        {
-            // TODO uncomment below to test the method and replace null with proper value
-            //string name = null;
-            //string authorization = null;
-            //Game item = null;
-            //instance.ApiGameByNamePatch(name, authorization, item);
-            
-        }
+
+		/// <summary>
+		/// Test ApiGameByNameGet
+		/// </summary>
+		[Test]
+		public void ApiGameByNameGetTestWithNoRights()
+		{
+			string name = Common.GameName;
+			string authorization = Common.UserAuth;
+			var ex = Assert.Catch(() => instance.ApiGameByNameGet(name, authorization)) as ApiException;
+			Assert.AreEqual(Common.ForbiddenCode, ex.ErrorCode);
+		}
+
+		/// <summary>
+		/// Test ApiGameByNameGet
+		/// </summary>
+		[Test]
+		public void ApiGameByNameGetTestWithBadRights()
+		{
+			string name = Common.GameName;
+			string authorization = Common.OtherAuth;
+			var ex = Assert.Catch(() => instance.ApiGameByNameGet(name, authorization)) as ApiException;
+			Assert.AreEqual(Common.NeedAuthCode, ex.ErrorCode);
+		}
         
         /// <summary>
         /// Test ApiGameGet
         /// </summary>
         [Test]
-        public void ApiGameGetTest()
+        public void ApiGameGetTestWithRights()
         {
-            // TODO uncomment below to test the method and replace null with proper value
-            //string authorization = null;
-            //var response = instance.ApiGameGet(authorization);
-            //Assert.IsInstanceOf<List<Game>> (response, "response is List<Game>");
+            string authorization = Common.AdminAuth;
+            var response = instance.ApiGameGet(authorization);
+            Assert.IsInstanceOf<List<Game>>(response, "response is List<Game>");
         }
-        
-        /// <summary>
-        /// Test ApiGamePost
-        /// </summary>
-        [Test]
-        public void ApiGamePostTest()
+
+		/// <summary>
+		/// Test ApiGameGet
+		/// </summary>
+		[Test]
+		public void ApiGameGetTestWithNoRights()
+		{
+			string authorization = Common.UserAuth;
+			var ex = Assert.Catch(() => instance.ApiGameGet(authorization)) as ApiException;
+			Assert.AreEqual(Common.ForbiddenCode, ex.ErrorCode);
+		}
+
+		/// <summary>
+		/// Test ApiGameGet
+		/// </summary>
+		[Test]
+		public void ApiGameGetTestWithBadRights()
+		{
+			string authorization = Common.OtherAuth;
+			var ex = Assert.Catch(() => instance.ApiGameGet(authorization)) as ApiException;
+			Assert.AreEqual(Common.NeedAuthCode, ex.ErrorCode);
+		}
+
+		/// <summary>
+		/// Test ApiGamePost
+		/// </summary>
+		[Test]
+        public void ApiGamePostTestWithRights()
         {
-            // TODO uncomment below to test the method and replace null with proper value
-            //string authorization = null;
-            //Game item = null;
-            //instance.ApiGamePost(authorization, item);
-            
+            string authorization = Common.AdminAuth;
+			string newName = "NewGame";
+			Game item = new Game(newName);
+
+			instance.ApiGamePost(authorization, item);
+
+			var game = instance.ApiGameByNameGet(newName, authorization);
+			Assert.IsNotNull(game);
         }
-        
-    }
+
+		/// <summary>
+		/// Test ApiGamePost
+		/// </summary>
+		[Test]
+		public void ApiGamePostTestWithNoRights()
+		{
+			string authorization = Common.UserAuth;
+			string chechAuthorization = Common.AdminAuth;
+			string newName = "NewGame";
+			Game item = new Game(newName);
+
+			var ex1 = Assert.Catch(() => instance.ApiGamePost(authorization, item)) as ApiException;
+			Assert.AreEqual(Common.ForbiddenCode, ex1.ErrorCode);
+
+			var ex2 = Assert.Catch(() => instance.ApiGameByNameGet(newName, chechAuthorization)) as ApiException;
+			Assert.AreEqual(Common.NotFoundCode, ex2.ErrorCode);
+		}
+
+		/// <summary>
+		/// Test ApiGamePost
+		/// </summary>
+		[Test]
+		public void ApiGamePostTestWithBadRights()
+		{
+			string authorization = Common.OtherAuth;
+			string chechAuthorization = Common.AdminAuth;
+			string newName = "NewGame";
+			Game item = new Game(newName);
+
+			var ex1 = Assert.Catch(() => instance.ApiGamePost(authorization, item)) as ApiException;
+			Assert.AreEqual(Common.NeedAuthCode, ex1.ErrorCode);
+
+			var ex2 = Assert.Catch(() => instance.ApiGameByNameGet(newName, chechAuthorization)) as ApiException;
+			Assert.AreEqual(Common.NotFoundCode, ex2.ErrorCode);
+		}
+	}
 
 }

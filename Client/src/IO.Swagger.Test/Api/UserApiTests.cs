@@ -85,7 +85,8 @@ namespace IO.Swagger.Test
 		/// Test ApiUserByNameDelete
 		/// </summary>
 		[Test]
-		public void ApiUserByNameDeleteTestWithNoRights() {
+		public void ApiUserByNameDeleteTestWithNoRights()
+		{
 			string name = Common.UserName;
 			string checkAuthorization = Common.AdminAuth;
 			string authorization = Common.UserAuth;
@@ -102,7 +103,8 @@ namespace IO.Swagger.Test
 		/// Test ApiUserByNameDelete
 		/// </summary>
 		[Test]
-		public void ApiUserByNameDeleteTestWithBadRights() {
+		public void ApiUserByNameDeleteTestWithBadRights()
+		{
 			string name = Common.UserName;
 			string checkAuthorization = Common.AdminAuth;
 			string authorization = Common.OtherAuth;
@@ -131,7 +133,8 @@ namespace IO.Swagger.Test
 		/// Test ApiUserByNameGet
 		/// </summary>
 		[Test]
-		public void ApiUserByNameGetTestWithNoRights() {
+		public void ApiUserByNameGetTestWithNoRights()
+		{
 			string name = Common.UserName;
 			string authorization = Common.OtherAuth;
 			var ex = Assert.Catch(() => instance.ApiUserByNameGet(name, authorization)) as ApiException;
@@ -142,7 +145,8 @@ namespace IO.Swagger.Test
 		/// Test ApiUserByNameGet
 		/// </summary>
 		[Test]
-		public void ApiUserByNameGetTestWithBadRights() {
+		public void ApiUserByNameGetTestWithBadRights()
+		{
 			string name = Common.UserName;
 			string authorization = Common.UserAuth;
 			var ex = Assert.Catch(() => instance.ApiUserByNameGet(name, authorization)) as ApiException;
@@ -157,35 +161,51 @@ namespace IO.Swagger.Test
         {
             string name = Common.UserName;
             string authorization = Common.AdminAuth;
-			var newName = name + "123";
-            User item = new User(newName, Common.UserName);
-            instance.ApiUserByNamePatch(name, authorization, item);
+			var newPass = name + "123";
+            User item = new User(name, newPass);
+
+			instance.ApiUserByNamePatch(name, authorization, item);
+
+			var user = instance.ApiUserByNameGet(name, authorization);
+			Assert.AreEqual(newPass, user.Password);
         }
 
 		/// <summary>
 		/// Test ApiUserByNamePatch
 		/// </summary>
 		[Test]
-		public void ApiUserByNamePatchTestWithNoRights() {
+		public void ApiUserByNamePatchTestWithNoRights()
+		{
 			string name = Common.UserName;
 			string authorization = Common.UserAuth;
-			var newName = name + "123";
-			User item = new User(newName, Common.UserName);
+			string chechAuthorization = Common.AdminAuth;
+			var newPass = name + "123";
+			User item = new User(name, newPass);
+
 			var ex = Assert.Catch(() => instance.ApiUserByNamePatch(name, authorization, item)) as ApiException;
 			Assert.AreEqual(Common.ForbiddenCode, ex.ErrorCode);
+
+			var user = instance.ApiUserByNameGet(name, chechAuthorization);
+			Assert.AreNotEqual(newPass, user.Password);
 		}
 
 		/// <summary>
 		/// Test ApiUserByNamePatch
 		/// </summary>
 		[Test]
-		public void ApiUserByNamePatchTestWithBadRights() {
+		public void ApiUserByNamePatchTestWithBadRights()
+		{
 			string name = Common.UserName;
 			string authorization = Common.OtherAuth;
-			var newName = name + "123";
-			User item = new User(newName, Common.UserName);
+			string chechAuthorization = Common.AdminAuth;
+			var newPass = name + "123";
+			User item = new User(name, newPass);
+
 			var ex = Assert.Catch(() => instance.ApiUserByNamePatch(name, authorization, item)) as ApiException;
 			Assert.AreEqual(Common.NeedAuthCode, ex.ErrorCode);
+
+			var user = instance.ApiUserByNameGet(name, chechAuthorization);
+			Assert.AreNotEqual(newPass, user.Password);
 		}
 
 		/// <summary>
@@ -203,7 +223,8 @@ namespace IO.Swagger.Test
 		/// Test ApiUserGet
 		/// </summary>
 		[Test]
-		public void ApiUserGetTestWithNoRights() {
+		public void ApiUserGetTestWithNoRights()
+		{
 			string authorization = Common.UserAuth;
 			var ex = Assert.Catch(() => instance.ApiUserGet(authorization)) as ApiException;
 			Assert.AreEqual(Common.ForbiddenCode, ex.ErrorCode);
@@ -213,7 +234,8 @@ namespace IO.Swagger.Test
 		/// Test ApiUserGet
 		/// </summary>
 		[Test]
-		public void ApiUserGetTestWithBadAuth() {
+		public void ApiUserGetTestWithBadAuth()
+		{
 			string authorization = Common.OtherAuth;
 			var ex = Assert.Catch(() => instance.ApiUserGet(authorization)) as ApiException;
 			Assert.AreEqual(Common.NeedAuthCode, ex.ErrorCode);
@@ -238,7 +260,8 @@ namespace IO.Swagger.Test
 		/// Test ApiUserPost
 		/// </summary>
 		[Test]
-		public void ApiUserPostTestWithNoRights() {
+		public void ApiUserPostTestWithNoRights()
+		{
 			string authorization = Common.UserAuth;
 			string checkAuthorization = Common.AdminAuth;
 			var userName = "NewUser";
@@ -255,7 +278,8 @@ namespace IO.Swagger.Test
 		/// Test ApiUserPost
 		/// </summary>
 		[Test]
-		public void ApiUserPostTestWithBadRights() {
+		public void ApiUserPostTestWithBadRights()
+		{
 			string authorization = Common.OtherAuth;
 			string checkAuthorization = Common.AdminAuth;
 			var userName = "NewUser";
@@ -272,7 +296,8 @@ namespace IO.Swagger.Test
 		/// Test ApiUserPost
 		/// </summary>
 		[Test]
-		public void ApiUserPostTestCheckNewUserWithNoRights() {
+		public void ApiUserPostTestCheckNewUserWithNoRights()
+		{
 			string authorization = Common.AdminAuth;
 			var userName = "NewUser";
 			User item = new User(userName, userName);
@@ -291,7 +316,8 @@ namespace IO.Swagger.Test
 		/// Test ApiUserPost
 		/// </summary>
 		[Test]
-		public void ApiUserPostTestCheckNewUserWithRights() {
+		public void ApiUserPostTestCheckNewUserWithRights()
+		{
 			string authorization = Common.AdminAuth;
 			var userName = "NewUser";
 			var roles = new List<UserRole>() { new UserRole(UserRole.PermissionsEnum.NUMBER_8) };

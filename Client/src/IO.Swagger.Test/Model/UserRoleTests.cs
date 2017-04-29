@@ -32,8 +32,7 @@ namespace IO.Swagger.Test
     [TestFixture]
     public class UserRoleTests
     {
-        // TODO uncomment below to declare an instance variable for UserRole
-        //private UserRole instance;
+        private UserRole instance;
 
         /// <summary>
         /// Setup before each test
@@ -41,8 +40,7 @@ namespace IO.Swagger.Test
         [SetUp]
         public void Init()
         {
-            // TODO uncomment below to create an instance of UserRole
-            //instance = new UserRole();
+            instance = new UserRole();
         }
 
         /// <summary>
@@ -60,8 +58,7 @@ namespace IO.Swagger.Test
         [Test]
         public void UserRoleInstanceTest()
         {
-            // TODO uncomment below to test "IsInstanceOfType" UserRole
-            //Assert.IsInstanceOfType<UserRole> (instance, "variable 'instance' is a UserRole");
+            Assert.IsInstanceOf<UserRole>(instance, "variable 'instance' is a UserRole");
         }
 
         /// <summary>
@@ -70,15 +67,28 @@ namespace IO.Swagger.Test
         [Test]
         public void PermissionsTest()
         {
-            // TODO unit test for the property 'Permissions'
-        }
+			var singlePermission = UserRole.PermissionsEnum.NUMBER_256;
+			instance.Permissions = singlePermission;
+			Assert.AreEqual(singlePermission, instance.Permissions);
+
+			var first = UserRole.PermissionsEnum.NUMBER_1;
+			var second = UserRole.PermissionsEnum.NUMBER_16;
+			var other = UserRole.PermissionsEnum.NUMBER_32;
+			var multiPermission = first | second;
+			instance.Permissions = multiPermission;
+			Assert.IsTrue((instance.Permissions & first) == first);
+			Assert.IsTrue((instance.Permissions & second) == second);
+			Assert.IsFalse((instance.Permissions & other) == other);
+		}
         /// <summary>
         /// Test the property 'Game'
         /// </summary>
         [Test]
         public void GameTest()
         {
-            // TODO unit test for the property 'Game'
+			var newGame = "NewGame";
+			instance.Game = newGame;
+			Assert.AreEqual(newGame, instance.Game);
         }
 
     }
