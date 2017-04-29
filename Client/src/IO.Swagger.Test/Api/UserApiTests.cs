@@ -68,46 +68,129 @@ namespace IO.Swagger.Test
         /// Test ApiUserByNameDelete
         /// </summary>
         [Test]
-        public void ApiUserByNameDeleteTest()
+        public void ApiUserByNameDeleteTestWithRights()
         {
-            // TODO uncomment below to test the method and replace null with proper value
-            //string name = null;
-            //string authorization = null;
-            //instance.ApiUserByNameDelete(name, authorization);
-            
+            string name = Common.UserName;
+            string authorization = Common.AdminAuth;
+
+			Assert.IsNotNull(instance.ApiUserByNameGet(name, authorization));
+
+			instance.ApiUserByNameDelete(name, authorization);
+
+			Assert.IsNull(instance.ApiUserByNameGet(name, authorization));
         }
-        
-        /// <summary>
-        /// Test ApiUserByNameGet
-        /// </summary>
-        [Test]
-        public void ApiUserByNameGetTest()
+
+		/// <summary>
+		/// Test ApiUserByNameDelete
+		/// </summary>
+		[Test]
+		public void ApiUserByNameDeleteTestWithNoRights() {
+			string name = Common.UserName;
+			string checkAuthorization = Common.AdminAuth;
+			string authorization = Common.UserName;
+
+			Assert.IsNotNull(instance.ApiUserByNameGet(name, checkAuthorization));
+
+			var ex = Assert.Catch(() => instance.ApiUserByNameDelete(name, authorization)) as ApiException;
+			Assert.AreEqual(Common.ForbiddenCode, ex.ErrorCode);
+
+			Assert.IsNotNull(instance.ApiUserByNameGet(name, checkAuthorization));
+		}
+
+		/// <summary>
+		/// Test ApiUserByNameDelete
+		/// </summary>
+		[Test]
+		public void ApiUserByNameDeleteTestWithBadRights() {
+			string name = Common.UserName;
+			string checkAuthorization = Common.AdminAuth;
+			string authorization = Common.OtherAuth;
+
+			Assert.IsNotNull(instance.ApiUserByNameGet(name, checkAuthorization));
+
+			var ex = Assert.Catch(() => instance.ApiUserByNameDelete(name, authorization)) as ApiException;
+			Assert.AreEqual(Common.NeedAuthCode, ex.ErrorCode);
+
+			Assert.IsNotNull(instance.ApiUserByNameGet(name, checkAuthorization));
+		}
+
+		/// <summary>
+		/// Test ApiUserByNameGet
+		/// </summary>
+		[Test]
+        public void ApiUserByNameGetTestWithRights()
         {
-            // TODO uncomment below to test the method and replace null with proper value
-            //string name = null;
-            //string authorization = null;
-            //instance.ApiUserByNameGet(name, authorization);
-            
+            string name = Common.UserName;
+            string authorization = Common.AdminAuth;
+            var user = instance.ApiUserByNameGet(name, authorization);
+			Assert.AreEqual(Common.UserName, user.Name);
         }
-        
-        /// <summary>
-        /// Test ApiUserByNamePatch
-        /// </summary>
-        [Test]
-        public void ApiUserByNamePatchTest()
+
+		/// <summary>
+		/// Test ApiUserByNameGet
+		/// </summary>
+		[Test]
+		public void ApiUserByNameGetTestWithNoRights() {
+			string name = Common.UserName;
+			string authorization = Common.OtherAuth;
+			var ex = Assert.Catch(() => instance.ApiUserByNameGet(name, authorization)) as ApiException;
+			Assert.AreEqual(Common.NeedAuthCode, ex.ErrorCode);
+		}
+
+		/// <summary>
+		/// Test ApiUserByNameGet
+		/// </summary>
+		[Test]
+		public void ApiUserByNameGetTestWithBadRights() {
+			string name = Common.UserName;
+			string authorization = Common.UserAuth;
+			var ex = Assert.Catch(() => instance.ApiUserByNameGet(name, authorization)) as ApiException;
+			Assert.AreEqual(Common.ForbiddenCode, ex.ErrorCode);
+		}
+
+		/// <summary>
+		/// Test ApiUserByNamePatch
+		/// </summary>
+		[Test]
+        public void ApiUserByNamePatchTestWithRights()
         {
-            // TODO uncomment below to test the method and replace null with proper value
-            //string name = null;
-            //string authorization = null;
-            //User item = null;
-            //instance.ApiUserByNamePatch(name, authorization, item);
-            
+            string name = Common.UserName;
+            string authorization = Common.AdminAuth;
+			var newName = name + "123";
+            User item = new User(newName, Common.UserName);
+            instance.ApiUserByNamePatch(name, authorization, item);
         }
-        
-        /// <summary>
-        /// Test ApiUserGet
-        /// </summary>
-        [Test]
+
+		/// <summary>
+		/// Test ApiUserByNamePatch
+		/// </summary>
+		[Test]
+		public void ApiUserByNamePatchTestWithNoRights() {
+			string name = Common.UserName;
+			string authorization = Common.UserName;
+			var newName = name + "123";
+			User item = new User(newName, Common.UserName);
+			var ex = Assert.Catch(() => instance.ApiUserByNamePatch(name, authorization, item)) as ApiException;
+			Assert.AreEqual(Common.NeedAuthCode, ex.ErrorCode);
+		}
+
+		/// <summary>
+		/// Test ApiUserByNamePatch
+		/// </summary>
+		[Test]
+		public void ApiUserByNamePatchTestWithBadRights() {
+			string name = Common.UserName;
+			string authorization = Common.OtherAuth;
+			var newName = name + "123";
+			User item = new User(newName, Common.UserName);
+			var ex = Assert.Catch(() => instance.ApiUserByNamePatch(name, authorization, item)) as ApiException;
+			Assert.AreEqual(Common.ForbiddenCode, ex.ErrorCode);
+		}
+
+		/// <summary>
+		/// Test ApiUserGet
+		/// </summary>
+		[Test]
         public void ApiUserGetTestWithRights()
         {
             string authorization = Common.AdminAuth;
@@ -139,15 +222,87 @@ namespace IO.Swagger.Test
 		/// Test ApiUserPost
 		/// </summary>
 		[Test]
-        public void ApiUserPostTest()
+        public void ApiUserPostTestWithRights()
         {
-            // TODO uncomment below to test the method and replace null with proper value
-            //string authorization = null;
-            //User item = null;
-            //instance.ApiUserPost(authorization, item);
-            
+            string authorization = Common.AdminAuth;
+			var userName = "NewUser";
+            User item = new User(userName, userName);
+
+            instance.ApiUserPost(authorization, item);
+
+			Assert.IsNotNull(instance.ApiUserByNameGet(userName, authorization));
         }
-        
-    }
+
+		/// <summary>
+		/// Test ApiUserPost
+		/// </summary>
+		[Test]
+		public void ApiUserPostTestWithNoRights() {
+			string authorization = Common.UserAuth;
+			string checkAuthorization = Common.AdminAuth;
+			var userName = "NewUser";
+			User item = new User(userName, userName);
+
+			var ex = Assert.Catch(() => instance.ApiUserPost(authorization, item)) as ApiException;
+			Assert.AreEqual(Common.ForbiddenCode, ex.ErrorCode);
+
+			Assert.IsNull(instance.ApiUserByNameGet(userName, checkAuthorization));
+		}
+
+		/// <summary>
+		/// Test ApiUserPost
+		/// </summary>
+		[Test]
+		public void ApiUserPostTestWithBadRights() {
+			string authorization = Common.OtherAuth;
+			string checkAuthorization = Common.AdminAuth;
+			var userName = "NewUser";
+			User item = new User(userName, userName);
+
+			var ex = Assert.Catch(() => instance.ApiUserPost(authorization, item)) as ApiException;
+			Assert.AreEqual(Common.NeedAuthCode, ex.ErrorCode);
+
+			Assert.IsNull(instance.ApiUserByNameGet(userName, checkAuthorization));
+		}
+
+		/// <summary>
+		/// Test ApiUserPost
+		/// </summary>
+		[Test]
+		public void ApiUserPostTestCheckNewUserWithNoRights() {
+			string authorization = Common.AdminAuth;
+			var userName = "NewUser";
+			User item = new User(userName, userName);
+
+			instance.ApiUserPost(authorization, item);
+
+			Assert.IsNotNull(instance.ApiUserByNameGet(userName, authorization));
+
+			var newUserAuth = Common.GetAuthHeader(userName, userName);
+
+			var ex = Assert.Catch(() => instance.ApiUserGet(newUserAuth)) as ApiException;
+			Assert.AreEqual(Common.ForbiddenCode, ex.ErrorCode);
+		}
+
+		/// <summary>
+		/// Test ApiUserPost
+		/// </summary>
+		[Test]
+		public void ApiUserPostTestCheckNewUserWithRights() {
+			string authorization = Common.AdminAuth;
+			var userName = "NewUser";
+			var roles = new List<UserRole>() { new UserRole(UserRole.PermissionsEnum.NUMBER_8) };
+			User item = new User(userName, userName, roles);
+
+			instance.ApiUserPost(authorization, item);
+
+			Assert.IsNotNull(instance.ApiUserByNameGet(userName, authorization));
+
+			var newUserAuth = Common.GetAuthHeader(userName, userName);
+
+			var ex = Assert.Catch(() => instance.ApiUserGet(newUserAuth)) as ApiException;
+			Assert.AreEqual(Common.ForbiddenCode, ex.ErrorCode);
+		}
+	}
 
 }

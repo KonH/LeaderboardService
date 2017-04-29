@@ -1,4 +1,6 @@
-﻿using IO.Swagger.Api;
+﻿using System;
+using System.Text;
+using IO.Swagger.Api;
 using IO.Swagger.Client;
 
 namespace IO.Swagger.Test {
@@ -8,6 +10,9 @@ namespace IO.Swagger.Test {
 		public const string OtherAuth = "Basic YWRtaW5qcDtqazphZG1pbg==";
 		public const int NeedAuthCode = 401;
 		public const int ForbiddenCode = 403;
+		public const string UserName = "user";
+		public const string AdminName = "admin";
+		public const string GameName = "Game";
 
 		public static Configuration DefaultConfig
 		{
@@ -26,6 +31,11 @@ namespace IO.Swagger.Test {
 		{
 			var testApi = new TestApi(DefaultConfig);
 			testApi.ApiTestCleanupPost();
+		}
+
+		public static string GetAuthHeader(string username, string password)
+		{
+			return Convert.ToBase64String(ASCIIEncoding.ASCII.GetBytes(username + ":" + password));
 		}
 	}
 }
