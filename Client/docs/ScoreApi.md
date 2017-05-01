@@ -9,7 +9,7 @@ Method | HTTP request | Description
 [**ApiScoreByIdPatch**](ScoreApi.md#apiscorebyidpatch) | **PATCH** /api/Score/{id} | 
 [**ApiScoreHistoryGet**](ScoreApi.md#apiscorehistoryget) | **GET** /api/Score/history | 
 [**ApiScorePost**](ScoreApi.md#apiscorepost) | **POST** /api/Score | 
-[**ApiScoreTopGet**](ScoreApi.md#apiscoretopget) | **GET** /api/Score/top | 
+[**ApiScoreTopByGameGet**](ScoreApi.md#apiscoretopbygameget) | **GET** /api/Score/top/{game} | 
 
 
 <a name="apiscorebyiddelete"></a>
@@ -197,7 +197,7 @@ No authorization required
 
 <a name="apiscorehistoryget"></a>
 # **ApiScoreHistoryGet**
-> List<ScoreItem> ApiScoreHistoryGet (string authorization = null)
+> List<ScoreItem> ApiScoreHistoryGet (string authorization = null, string game = null, string param = null, string version = null, string user = null)
 
 
 
@@ -218,10 +218,14 @@ namespace Example
             
             var apiInstance = new ScoreApi();
             var authorization = authorization_example;  // string |  (optional) 
+            var game = game_example;  // string |  (optional) 
+            var param = param_example;  // string |  (optional) 
+            var version = version_example;  // string |  (optional) 
+            var user = user_example;  // string |  (optional) 
 
             try
             {
-                List&lt;ScoreItem&gt; result = apiInstance.ApiScoreHistoryGet(authorization);
+                List&lt;ScoreItem&gt; result = apiInstance.ApiScoreHistoryGet(authorization, game, param, version, user);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -238,6 +242,10 @@ namespace Example
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **authorization** | **string**|  | [optional] 
+ **game** | **string**|  | [optional] 
+ **param** | **string**|  | [optional] 
+ **version** | **string**|  | [optional] 
+ **user** | **string**|  | [optional] 
 
 ### Return type
 
@@ -315,9 +323,9 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="apiscoretopget"></a>
-# **ApiScoreTopGet**
-> List<ScoreItem> ApiScoreTopGet (string authorization = null)
+<a name="apiscoretopbygameget"></a>
+# **ApiScoreTopByGameGet**
+> List<ScoreItem> ApiScoreTopByGameGet (string game, string authorization = null, int? max = null, string param = null, string version = null)
 
 
 
@@ -331,22 +339,26 @@ using IO.Swagger.Model;
 
 namespace Example
 {
-    public class ApiScoreTopGetExample
+    public class ApiScoreTopByGameGetExample
     {
         public void main()
         {
             
             var apiInstance = new ScoreApi();
+            var game = game_example;  // string | 
             var authorization = authorization_example;  // string |  (optional) 
+            var max = 56;  // int? |  (optional) 
+            var param = param_example;  // string |  (optional) 
+            var version = version_example;  // string |  (optional) 
 
             try
             {
-                List&lt;ScoreItem&gt; result = apiInstance.ApiScoreTopGet(authorization);
+                List&lt;ScoreItem&gt; result = apiInstance.ApiScoreTopByGameGet(game, authorization, max, param, version);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling ScoreApi.ApiScoreTopGet: " + e.Message );
+                Debug.Print("Exception when calling ScoreApi.ApiScoreTopByGameGet: " + e.Message );
             }
         }
     }
@@ -357,7 +369,11 @@ namespace Example
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **game** | **string**|  | 
  **authorization** | **string**|  | [optional] 
+ **max** | **int?**|  | [optional] 
+ **param** | **string**|  | [optional] 
+ **version** | **string**|  | [optional] 
 
 ### Return type
 
