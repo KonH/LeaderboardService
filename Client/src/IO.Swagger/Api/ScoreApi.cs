@@ -103,8 +103,12 @@ namespace IO.Swagger.Api
         /// </remarks>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorization"> (optional)</param>
+        /// <param name="game"> (optional)</param>
+        /// <param name="param"> (optional)</param>
+        /// <param name="version"> (optional)</param>
+        /// <param name="user"> (optional)</param>
         /// <returns>List&lt;ScoreItem&gt;</returns>
-        List<ScoreItem> ApiScoreHistoryGet (string authorization = null);
+        List<ScoreItem> ApiScoreHistoryGet (string authorization = null, string game = null, string param = null, string version = null, string user = null);
 
         /// <summary>
         /// 
@@ -114,8 +118,12 @@ namespace IO.Swagger.Api
         /// </remarks>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorization"> (optional)</param>
+        /// <param name="game"> (optional)</param>
+        /// <param name="param"> (optional)</param>
+        /// <param name="version"> (optional)</param>
+        /// <param name="user"> (optional)</param>
         /// <returns>ApiResponse of List&lt;ScoreItem&gt;</returns>
-        ApiResponse<List<ScoreItem>> ApiScoreHistoryGetWithHttpInfo (string authorization = null);
+        ApiResponse<List<ScoreItem>> ApiScoreHistoryGetWithHttpInfo (string authorization = null, string game = null, string param = null, string version = null, string user = null);
         /// <summary>
         /// 
         /// </summary>
@@ -146,9 +154,13 @@ namespace IO.Swagger.Api
         /// 
         /// </remarks>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="game"></param>
         /// <param name="authorization"> (optional)</param>
+        /// <param name="max"> (optional)</param>
+        /// <param name="param"> (optional)</param>
+        /// <param name="version"> (optional)</param>
         /// <returns>List&lt;ScoreItem&gt;</returns>
-        List<ScoreItem> ApiScoreTopGet (string authorization = null);
+        List<ScoreItem> ApiScoreTopByGameGet (string game, string authorization = null, int? max = null, string param = null, string version = null);
 
         /// <summary>
         /// 
@@ -157,9 +169,13 @@ namespace IO.Swagger.Api
         /// 
         /// </remarks>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="game"></param>
         /// <param name="authorization"> (optional)</param>
+        /// <param name="max"> (optional)</param>
+        /// <param name="param"> (optional)</param>
+        /// <param name="version"> (optional)</param>
         /// <returns>ApiResponse of List&lt;ScoreItem&gt;</returns>
-        ApiResponse<List<ScoreItem>> ApiScoreTopGetWithHttpInfo (string authorization = null);
+        ApiResponse<List<ScoreItem>> ApiScoreTopByGameGetWithHttpInfo (string game, string authorization = null, int? max = null, string param = null, string version = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -241,8 +257,12 @@ namespace IO.Swagger.Api
         /// </remarks>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorization"> (optional)</param>
+        /// <param name="game"> (optional)</param>
+        /// <param name="param"> (optional)</param>
+        /// <param name="version"> (optional)</param>
+        /// <param name="user"> (optional)</param>
         /// <returns>Task of List&lt;ScoreItem&gt;</returns>
-        System.Threading.Tasks.Task<List<ScoreItem>> ApiScoreHistoryGetAsync (string authorization = null);
+        System.Threading.Tasks.Task<List<ScoreItem>> ApiScoreHistoryGetAsync (string authorization = null, string game = null, string param = null, string version = null, string user = null);
 
         /// <summary>
         /// 
@@ -252,8 +272,12 @@ namespace IO.Swagger.Api
         /// </remarks>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorization"> (optional)</param>
+        /// <param name="game"> (optional)</param>
+        /// <param name="param"> (optional)</param>
+        /// <param name="version"> (optional)</param>
+        /// <param name="user"> (optional)</param>
         /// <returns>Task of ApiResponse (List&lt;ScoreItem&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<ScoreItem>>> ApiScoreHistoryGetAsyncWithHttpInfo (string authorization = null);
+        System.Threading.Tasks.Task<ApiResponse<List<ScoreItem>>> ApiScoreHistoryGetAsyncWithHttpInfo (string authorization = null, string game = null, string param = null, string version = null, string user = null);
         /// <summary>
         /// 
         /// </summary>
@@ -284,9 +308,13 @@ namespace IO.Swagger.Api
         /// 
         /// </remarks>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="game"></param>
         /// <param name="authorization"> (optional)</param>
+        /// <param name="max"> (optional)</param>
+        /// <param name="param"> (optional)</param>
+        /// <param name="version"> (optional)</param>
         /// <returns>Task of List&lt;ScoreItem&gt;</returns>
-        System.Threading.Tasks.Task<List<ScoreItem>> ApiScoreTopGetAsync (string authorization = null);
+        System.Threading.Tasks.Task<List<ScoreItem>> ApiScoreTopByGameGetAsync (string game, string authorization = null, int? max = null, string param = null, string version = null);
 
         /// <summary>
         /// 
@@ -295,9 +323,13 @@ namespace IO.Swagger.Api
         /// 
         /// </remarks>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="game"></param>
         /// <param name="authorization"> (optional)</param>
+        /// <param name="max"> (optional)</param>
+        /// <param name="param"> (optional)</param>
+        /// <param name="version"> (optional)</param>
         /// <returns>Task of ApiResponse (List&lt;ScoreItem&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<ScoreItem>>> ApiScoreTopGetAsyncWithHttpInfo (string authorization = null);
+        System.Threading.Tasks.Task<ApiResponse<List<ScoreItem>>> ApiScoreTopByGameGetAsyncWithHttpInfo (string game, string authorization = null, int? max = null, string param = null, string version = null);
         #endregion Asynchronous Operations
     }
 
@@ -878,10 +910,14 @@ namespace IO.Swagger.Api
         /// </summary>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorization"> (optional)</param>
+        /// <param name="game"> (optional)</param>
+        /// <param name="param"> (optional)</param>
+        /// <param name="version"> (optional)</param>
+        /// <param name="user"> (optional)</param>
         /// <returns>List&lt;ScoreItem&gt;</returns>
-        public List<ScoreItem> ApiScoreHistoryGet (string authorization = null)
+        public List<ScoreItem> ApiScoreHistoryGet (string authorization = null, string game = null, string param = null, string version = null, string user = null)
         {
-             ApiResponse<List<ScoreItem>> localVarResponse = ApiScoreHistoryGetWithHttpInfo(authorization);
+             ApiResponse<List<ScoreItem>> localVarResponse = ApiScoreHistoryGetWithHttpInfo(authorization, game, param, version, user);
              return localVarResponse.Data;
         }
 
@@ -890,8 +926,12 @@ namespace IO.Swagger.Api
         /// </summary>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorization"> (optional)</param>
+        /// <param name="game"> (optional)</param>
+        /// <param name="param"> (optional)</param>
+        /// <param name="version"> (optional)</param>
+        /// <param name="user"> (optional)</param>
         /// <returns>ApiResponse of List&lt;ScoreItem&gt;</returns>
-        public ApiResponse< List<ScoreItem> > ApiScoreHistoryGetWithHttpInfo (string authorization = null)
+        public ApiResponse< List<ScoreItem> > ApiScoreHistoryGetWithHttpInfo (string authorization = null, string game = null, string param = null, string version = null, string user = null)
         {
 
             var localVarPath = "/api/Score/history";
@@ -920,6 +960,10 @@ namespace IO.Swagger.Api
             // set "format" to json by default
             // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
             localVarPathParams.Add("format", "json");
+            if (game != null) localVarQueryParams.Add("game", Configuration.ApiClient.ParameterToString(game)); // query parameter
+            if (param != null) localVarQueryParams.Add("param", Configuration.ApiClient.ParameterToString(param)); // query parameter
+            if (version != null) localVarQueryParams.Add("version", Configuration.ApiClient.ParameterToString(version)); // query parameter
+            if (user != null) localVarQueryParams.Add("user", Configuration.ApiClient.ParameterToString(user)); // query parameter
             if (authorization != null) localVarHeaderParams.Add("Authorization", Configuration.ApiClient.ParameterToString(authorization)); // header parameter
 
 
@@ -947,10 +991,14 @@ namespace IO.Swagger.Api
         /// </summary>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorization"> (optional)</param>
+        /// <param name="game"> (optional)</param>
+        /// <param name="param"> (optional)</param>
+        /// <param name="version"> (optional)</param>
+        /// <param name="user"> (optional)</param>
         /// <returns>Task of List&lt;ScoreItem&gt;</returns>
-        public async System.Threading.Tasks.Task<List<ScoreItem>> ApiScoreHistoryGetAsync (string authorization = null)
+        public async System.Threading.Tasks.Task<List<ScoreItem>> ApiScoreHistoryGetAsync (string authorization = null, string game = null, string param = null, string version = null, string user = null)
         {
-             ApiResponse<List<ScoreItem>> localVarResponse = await ApiScoreHistoryGetAsyncWithHttpInfo(authorization);
+             ApiResponse<List<ScoreItem>> localVarResponse = await ApiScoreHistoryGetAsyncWithHttpInfo(authorization, game, param, version, user);
              return localVarResponse.Data;
 
         }
@@ -960,8 +1008,12 @@ namespace IO.Swagger.Api
         /// </summary>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorization"> (optional)</param>
+        /// <param name="game"> (optional)</param>
+        /// <param name="param"> (optional)</param>
+        /// <param name="version"> (optional)</param>
+        /// <param name="user"> (optional)</param>
         /// <returns>Task of ApiResponse (List&lt;ScoreItem&gt;)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<List<ScoreItem>>> ApiScoreHistoryGetAsyncWithHttpInfo (string authorization = null)
+        public async System.Threading.Tasks.Task<ApiResponse<List<ScoreItem>>> ApiScoreHistoryGetAsyncWithHttpInfo (string authorization = null, string game = null, string param = null, string version = null, string user = null)
         {
 
             var localVarPath = "/api/Score/history";
@@ -990,6 +1042,10 @@ namespace IO.Swagger.Api
             // set "format" to json by default
             // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
             localVarPathParams.Add("format", "json");
+            if (game != null) localVarQueryParams.Add("game", Configuration.ApiClient.ParameterToString(game)); // query parameter
+            if (param != null) localVarQueryParams.Add("param", Configuration.ApiClient.ParameterToString(param)); // query parameter
+            if (version != null) localVarQueryParams.Add("version", Configuration.ApiClient.ParameterToString(version)); // query parameter
+            if (user != null) localVarQueryParams.Add("user", Configuration.ApiClient.ParameterToString(user)); // query parameter
             if (authorization != null) localVarHeaderParams.Add("Authorization", Configuration.ApiClient.ParameterToString(authorization)); // header parameter
 
 
@@ -1181,11 +1237,15 @@ namespace IO.Swagger.Api
         ///  
         /// </summary>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="game"></param>
         /// <param name="authorization"> (optional)</param>
+        /// <param name="max"> (optional)</param>
+        /// <param name="param"> (optional)</param>
+        /// <param name="version"> (optional)</param>
         /// <returns>List&lt;ScoreItem&gt;</returns>
-        public List<ScoreItem> ApiScoreTopGet (string authorization = null)
+        public List<ScoreItem> ApiScoreTopByGameGet (string game, string authorization = null, int? max = null, string param = null, string version = null)
         {
-             ApiResponse<List<ScoreItem>> localVarResponse = ApiScoreTopGetWithHttpInfo(authorization);
+             ApiResponse<List<ScoreItem>> localVarResponse = ApiScoreTopByGameGetWithHttpInfo(game, authorization, max, param, version);
              return localVarResponse.Data;
         }
 
@@ -1193,12 +1253,19 @@ namespace IO.Swagger.Api
         ///  
         /// </summary>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="game"></param>
         /// <param name="authorization"> (optional)</param>
+        /// <param name="max"> (optional)</param>
+        /// <param name="param"> (optional)</param>
+        /// <param name="version"> (optional)</param>
         /// <returns>ApiResponse of List&lt;ScoreItem&gt;</returns>
-        public ApiResponse< List<ScoreItem> > ApiScoreTopGetWithHttpInfo (string authorization = null)
+        public ApiResponse< List<ScoreItem> > ApiScoreTopByGameGetWithHttpInfo (string game, string authorization = null, int? max = null, string param = null, string version = null)
         {
+            // verify the required parameter 'game' is set
+            if (game == null)
+                throw new ApiException(400, "Missing required parameter 'game' when calling ScoreApi->ApiScoreTopByGameGet");
 
-            var localVarPath = "/api/Score/top";
+            var localVarPath = "/api/Score/top/{game}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -1224,6 +1291,10 @@ namespace IO.Swagger.Api
             // set "format" to json by default
             // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
             localVarPathParams.Add("format", "json");
+            if (game != null) localVarPathParams.Add("game", Configuration.ApiClient.ParameterToString(game)); // path parameter
+            if (max != null) localVarQueryParams.Add("max", Configuration.ApiClient.ParameterToString(max)); // query parameter
+            if (param != null) localVarQueryParams.Add("param", Configuration.ApiClient.ParameterToString(param)); // query parameter
+            if (version != null) localVarQueryParams.Add("version", Configuration.ApiClient.ParameterToString(version)); // query parameter
             if (authorization != null) localVarHeaderParams.Add("Authorization", Configuration.ApiClient.ParameterToString(authorization)); // header parameter
 
 
@@ -1236,7 +1307,7 @@ namespace IO.Swagger.Api
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApiScoreTopGet", localVarResponse);
+                Exception exception = ExceptionFactory("ApiScoreTopByGameGet", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1250,11 +1321,15 @@ namespace IO.Swagger.Api
         ///  
         /// </summary>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="game"></param>
         /// <param name="authorization"> (optional)</param>
+        /// <param name="max"> (optional)</param>
+        /// <param name="param"> (optional)</param>
+        /// <param name="version"> (optional)</param>
         /// <returns>Task of List&lt;ScoreItem&gt;</returns>
-        public async System.Threading.Tasks.Task<List<ScoreItem>> ApiScoreTopGetAsync (string authorization = null)
+        public async System.Threading.Tasks.Task<List<ScoreItem>> ApiScoreTopByGameGetAsync (string game, string authorization = null, int? max = null, string param = null, string version = null)
         {
-             ApiResponse<List<ScoreItem>> localVarResponse = await ApiScoreTopGetAsyncWithHttpInfo(authorization);
+             ApiResponse<List<ScoreItem>> localVarResponse = await ApiScoreTopByGameGetAsyncWithHttpInfo(game, authorization, max, param, version);
              return localVarResponse.Data;
 
         }
@@ -1263,12 +1338,19 @@ namespace IO.Swagger.Api
         ///  
         /// </summary>
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="game"></param>
         /// <param name="authorization"> (optional)</param>
+        /// <param name="max"> (optional)</param>
+        /// <param name="param"> (optional)</param>
+        /// <param name="version"> (optional)</param>
         /// <returns>Task of ApiResponse (List&lt;ScoreItem&gt;)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<List<ScoreItem>>> ApiScoreTopGetAsyncWithHttpInfo (string authorization = null)
+        public async System.Threading.Tasks.Task<ApiResponse<List<ScoreItem>>> ApiScoreTopByGameGetAsyncWithHttpInfo (string game, string authorization = null, int? max = null, string param = null, string version = null)
         {
+            // verify the required parameter 'game' is set
+            if (game == null)
+                throw new ApiException(400, "Missing required parameter 'game' when calling ScoreApi->ApiScoreTopByGameGet");
 
-            var localVarPath = "/api/Score/top";
+            var localVarPath = "/api/Score/top/{game}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -1294,6 +1376,10 @@ namespace IO.Swagger.Api
             // set "format" to json by default
             // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
             localVarPathParams.Add("format", "json");
+            if (game != null) localVarPathParams.Add("game", Configuration.ApiClient.ParameterToString(game)); // path parameter
+            if (max != null) localVarQueryParams.Add("max", Configuration.ApiClient.ParameterToString(max)); // query parameter
+            if (param != null) localVarQueryParams.Add("param", Configuration.ApiClient.ParameterToString(param)); // query parameter
+            if (version != null) localVarQueryParams.Add("version", Configuration.ApiClient.ParameterToString(version)); // query parameter
             if (authorization != null) localVarHeaderParams.Add("Authorization", Configuration.ApiClient.ParameterToString(authorization)); // header parameter
 
 
@@ -1306,7 +1392,7 @@ namespace IO.Swagger.Api
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApiScoreTopGet", localVarResponse);
+                Exception exception = ExceptionFactory("ApiScoreTopByGameGet", localVarResponse);
                 if (exception != null) throw exception;
             }
 
