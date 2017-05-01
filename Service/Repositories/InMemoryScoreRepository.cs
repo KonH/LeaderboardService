@@ -17,10 +17,28 @@ namespace LeaderboardService.Repositories
 
 		public IEnumerable<ScoreItem> GetTop(int max, string game = null, string param = null, string version = null)
 		{
-			return _scores.Values.
+			var topList = new List<ScoreItem>();
+			var users = new List<string>();
+			var searchList = 
+				_scores.Values.
 				Where(item => IsWantedItem(item, game, param, version, null)).
-				Take(max).
 				OrderByDescending(item => item.Score);
+			foreach ( var item in searchList )
+			{
+				if ( topList.Count >= max )
+				{
+					break;
+				}
+				var user = item.User;
+				if ( users.Contains(user) )
+				{
+					continue;
+				} else {
+					topList.Add(item);
+					users.Add(user);
+				}
+			}
+			return topList;
 		}
 
 		public IEnumerable<ScoreItem> GetHistory(string game = null, string param = null, string version = null, string user = null)
