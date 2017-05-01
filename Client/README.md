@@ -98,11 +98,12 @@ Class | Method | HTTP request | Description
 *GameApi* | [**ApiGameByNamePatch**](docs/GameApi.md#apigamebynamepatch) | **PATCH** /api/Game/{name} | 
 *GameApi* | [**ApiGameGet**](docs/GameApi.md#apigameget) | **GET** /api/Game | 
 *GameApi* | [**ApiGamePost**](docs/GameApi.md#apigamepost) | **POST** /api/Game | 
-*ScoreApi* | [**ApiScoreByGameByVersionByParamMaxmaxGet**](docs/ScoreApi.md#apiscorebygamebyversionbyparammaxmaxget) | **GET** /api/Score/{game}/{version}/{param}/max&#x3D;{max} | 
 *ScoreApi* | [**ApiScoreByIdDelete**](docs/ScoreApi.md#apiscorebyiddelete) | **DELETE** /api/Score/{id} | 
 *ScoreApi* | [**ApiScoreByIdGet**](docs/ScoreApi.md#apiscorebyidget) | **GET** /api/Score/{id} | 
 *ScoreApi* | [**ApiScoreByIdPatch**](docs/ScoreApi.md#apiscorebyidpatch) | **PATCH** /api/Score/{id} | 
+*ScoreApi* | [**ApiScoreHistoryGet**](docs/ScoreApi.md#apiscorehistoryget) | **GET** /api/Score/history | 
 *ScoreApi* | [**ApiScorePost**](docs/ScoreApi.md#apiscorepost) | **POST** /api/Score | 
+*ScoreApi* | [**ApiScoreTopGet**](docs/ScoreApi.md#apiscoretopget) | **GET** /api/Score/top | 
 *TestApi* | [**ApiTestCleanupPost**](docs/TestApi.md#apitestcleanuppost) | **POST** /api/Test/cleanup | 
 *TestApi* | [**ApiTestPreparePost**](docs/TestApi.md#apitestpreparepost) | **POST** /api/Test/prepare | 
 *UserApi* | [**ApiUserByNameDelete**](docs/UserApi.md#apiuserbynamedelete) | **DELETE** /api/User/{name} | 

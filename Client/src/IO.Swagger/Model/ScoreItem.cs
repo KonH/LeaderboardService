@@ -37,13 +37,17 @@ namespace IO.Swagger.Model
         /// <param name="Version">Version.</param>
         /// <param name="Param">Param.</param>
         /// <param name="Score">Score.</param>
-        public ScoreItem(string Key = default(string), string Game = default(string), string Version = default(string), string Param = default(string), int? Score = default(int?))
+        /// <param name="User">User.</param>
+        /// <param name="Date">Date.</param>
+        public ScoreItem(string Key = default(string), string Game = default(string), string Version = default(string), string Param = default(string), int? Score = default(int?), string User = default(string), DateTime? Date = default(DateTime?))
         {
             this.Key = Key;
             this.Game = Game;
             this.Version = Version;
             this.Param = Param;
             this.Score = Score;
+            this.User = User;
+            this.Date = Date;
         }
         
         /// <summary>
@@ -72,6 +76,16 @@ namespace IO.Swagger.Model
         [DataMember(Name="score", EmitDefaultValue=false)]
         public int? Score { get; set; }
         /// <summary>
+        /// Gets or Sets User
+        /// </summary>
+        [DataMember(Name="user", EmitDefaultValue=false)]
+        public string User { get; set; }
+        /// <summary>
+        /// Gets or Sets Date
+        /// </summary>
+        [DataMember(Name="date", EmitDefaultValue=false)]
+        public DateTime? Date { get; set; }
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -84,6 +98,8 @@ namespace IO.Swagger.Model
             sb.Append("  Version: ").Append(Version).Append("\n");
             sb.Append("  Param: ").Append(Param).Append("\n");
             sb.Append("  Score: ").Append(Score).Append("\n");
+            sb.Append("  User: ").Append(User).Append("\n");
+            sb.Append("  Date: ").Append(Date).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -144,6 +160,16 @@ namespace IO.Swagger.Model
                     this.Score == other.Score ||
                     this.Score != null &&
                     this.Score.Equals(other.Score)
+                ) && 
+                (
+                    this.User == other.User ||
+                    this.User != null &&
+                    this.User.Equals(other.User)
+                ) && 
+                (
+                    this.Date == other.Date ||
+                    this.Date != null &&
+                    this.Date.Equals(other.Date)
                 );
         }
 
@@ -168,6 +194,10 @@ namespace IO.Swagger.Model
                     hash = hash * 59 + this.Param.GetHashCode();
                 if (this.Score != null)
                     hash = hash * 59 + this.Score.GetHashCode();
+                if (this.User != null)
+                    hash = hash * 59 + this.User.GetHashCode();
+                if (this.Date != null)
+                    hash = hash * 59 + this.Date.GetHashCode();
                 return hash;
             }
         }

@@ -4,79 +4,13 @@ All URIs are relative to *https://localhost/*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ApiScoreByGameByVersionByParamMaxmaxGet**](ScoreApi.md#apiscorebygamebyversionbyparammaxmaxget) | **GET** /api/Score/{game}/{version}/{param}/max&#x3D;{max} | 
 [**ApiScoreByIdDelete**](ScoreApi.md#apiscorebyiddelete) | **DELETE** /api/Score/{id} | 
 [**ApiScoreByIdGet**](ScoreApi.md#apiscorebyidget) | **GET** /api/Score/{id} | 
 [**ApiScoreByIdPatch**](ScoreApi.md#apiscorebyidpatch) | **PATCH** /api/Score/{id} | 
+[**ApiScoreHistoryGet**](ScoreApi.md#apiscorehistoryget) | **GET** /api/Score/history | 
 [**ApiScorePost**](ScoreApi.md#apiscorepost) | **POST** /api/Score | 
+[**ApiScoreTopGet**](ScoreApi.md#apiscoretopget) | **GET** /api/Score/top | 
 
-
-<a name="apiscorebygamebyversionbyparammaxmaxget"></a>
-# **ApiScoreByGameByVersionByParamMaxmaxGet**
-> List<ScoreItem> ApiScoreByGameByVersionByParamMaxmaxGet (int? max, string game, string param, string version, string authorization = null)
-
-
-
-### Example
-```csharp
-using System;
-using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
-
-namespace Example
-{
-    public class ApiScoreByGameByVersionByParamMaxmaxGetExample
-    {
-        public void main()
-        {
-            
-            var apiInstance = new ScoreApi();
-            var max = 56;  // int? | 
-            var game = game_example;  // string | 
-            var param = param_example;  // string | 
-            var version = version_example;  // string | 
-            var authorization = authorization_example;  // string |  (optional) 
-
-            try
-            {
-                List&lt;ScoreItem&gt; result = apiInstance.ApiScoreByGameByVersionByParamMaxmaxGet(max, game, param, version, authorization);
-                Debug.WriteLine(result);
-            }
-            catch (Exception e)
-            {
-                Debug.Print("Exception when calling ScoreApi.ApiScoreByGameByVersionByParamMaxmaxGet: " + e.Message );
-            }
-        }
-    }
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **max** | **int?**|  | 
- **game** | **string**|  | 
- **param** | **string**|  | 
- **version** | **string**|  | 
- **authorization** | **string**|  | [optional] 
-
-### Return type
-
-[**List<ScoreItem>**](ScoreItem.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 <a name="apiscorebyiddelete"></a>
 # **ApiScoreByIdDelete**
@@ -261,6 +195,65 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+<a name="apiscorehistoryget"></a>
+# **ApiScoreHistoryGet**
+> List<ScoreItem> ApiScoreHistoryGet (string authorization = null)
+
+
+
+### Example
+```csharp
+using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class ApiScoreHistoryGetExample
+    {
+        public void main()
+        {
+            
+            var apiInstance = new ScoreApi();
+            var authorization = authorization_example;  // string |  (optional) 
+
+            try
+            {
+                List&lt;ScoreItem&gt; result = apiInstance.ApiScoreHistoryGet(authorization);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling ScoreApi.ApiScoreHistoryGet: " + e.Message );
+            }
+        }
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **authorization** | **string**|  | [optional] 
+
+### Return type
+
+[**List<ScoreItem>**](ScoreItem.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 <a name="apiscorepost"></a>
 # **ApiScorePost**
 > ScoreItem ApiScorePost (string authorization = null, ScoreItem item = null)
@@ -318,6 +311,65 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: application/json, text/json, application/json-patch+json
+ - **Accept**: text/plain, application/json, text/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a name="apiscoretopget"></a>
+# **ApiScoreTopGet**
+> List<ScoreItem> ApiScoreTopGet (string authorization = null)
+
+
+
+### Example
+```csharp
+using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class ApiScoreTopGetExample
+    {
+        public void main()
+        {
+            
+            var apiInstance = new ScoreApi();
+            var authorization = authorization_example;  // string |  (optional) 
+
+            try
+            {
+                List&lt;ScoreItem&gt; result = apiInstance.ApiScoreTopGet(authorization);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling ScoreApi.ApiScoreTopGet: " + e.Message );
+            }
+        }
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **authorization** | **string**|  | [optional] 
+
+### Return type
+
+[**List<ScoreItem>**](ScoreItem.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: text/plain, application/json, text/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
