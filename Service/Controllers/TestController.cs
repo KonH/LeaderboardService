@@ -72,6 +72,8 @@ namespace LeaderboardService.Controllers
 				Roles = new List<UserRole>(new UserRole[] {
 					new UserRole() {
 						Permissions =
+							UserPermission.PostScores |
+							UserPermission.ReadScores |
 							UserPermission.UpdateScores |
 							UserPermission.ReadGames |
 							UserPermission.PostGames |

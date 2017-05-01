@@ -8,6 +8,7 @@ namespace IO.Swagger.Test {
 		public const string AdminAuth = "Basic YWRtaW46YWRtaW4=";
 		public const string UserAuth = "Basic dXNlcjp1c2Vy";
 		public const string OtherAuth = "Basic YWRtaW5qcDtqazphZG1pbg==";
+		public const int BadRequestCode = 400;
 		public const int NeedAuthCode = 401;
 		public const int ForbiddenCode = 403;
 		public const int NotFoundCode = 404;
