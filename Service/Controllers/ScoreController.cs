@@ -20,9 +20,9 @@ namespace LeaderboardService.Controllers
 			GameItems = gameItems;
 			Auth = auth;
 		}
-
-		[HttpGet("top")]
-		public IEnumerable<ScoreItem> GetTop([FromBasicAuth] string auth, int max, string game, string param = null, string version = null)
+	
+		[HttpGet("top/{game}")]
+		public IEnumerable<ScoreItem> GetTop([FromBasicAuth] string auth, string game, [FromQuery]int max = int.MaxValue, [FromQuery]string param = null, [FromQuery]string version = null)
 		{
 			if (!Auth.IsAllowed(auth, game, UserPermission.ReadScores))
 			{
@@ -33,7 +33,7 @@ namespace LeaderboardService.Controllers
 		}
 
 		[HttpGet("history")]
-		public IEnumerable<ScoreItem> GetHistory([FromBasicAuth] string auth, string game = null, string param = null, string version = null, string user = null)
+		public IEnumerable<ScoreItem> GetHistory([FromBasicAuth] string auth, [FromQuery]string game = null, [FromQuery]string param = null, [FromQuery]string version = null, [FromQuery]string user = null)
 		{
 			if (!Auth.IsAllowed(auth, UserPermission.ReadScores))
 			{
