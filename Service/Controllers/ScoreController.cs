@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using LeaderboardService.Models;
@@ -20,15 +21,26 @@ namespace LeaderboardService.Controllers
 			Auth = auth;
 		}
 
-		[HttpGet("{game}/{version}/{param}/max={max}")]
-		public IEnumerable<ScoreItem> GetAll([FromBasicAuth] string auth, int max, string game, string param = null, string version = null)
+		[HttpGet("top")]
+		public IEnumerable<ScoreItem> GetTop([FromBasicAuth] string auth, int max, string game, string param = null, string version = null)
 		{
 			if (!Auth.IsAllowed(auth, game, UserPermission.ReadScores))
 			{
 				Response.StatusCode = Auth.StatusCode;
 				return null;
 			}
-			return ScoreItems.GetAll(max, game, param, version);
+			return ScoreItems.GetTop(max, game, param, version);
+		}
+
+		[HttpGet("history")]
+		public IEnumerable<ScoreItem> GetHistory([FromBasicAuth] string auth, string game = null, string param = null, string version = null, string user = null)
+		{
+			if (!Auth.IsAllowed(auth, UserPermission.ReadScores))
+			{
+				Response.StatusCode = Auth.StatusCode;
+				return null;
+			}
+			return ScoreItems.GetHistory(game, param, version, user);
 		}
 
 		[HttpGet("{id}", Name = "GetScore")]
@@ -66,6 +78,7 @@ namespace LeaderboardService.Controllers
 			{
 				return BadRequest("Game not found");
 			}
+			item.Date = DateTime.Now;
 			ScoreItems.Add(item);
 			return CreatedAtRoute("GetScore", new { id = item.Key }, item);
 		}

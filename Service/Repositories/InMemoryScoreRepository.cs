@@ -15,20 +15,28 @@ namespace LeaderboardService.Repositories
 		{
 		}
 
-		public IEnumerable<ScoreItem> GetAll(int max, string game = null, string param = null, string version = null)
+		public IEnumerable<ScoreItem> GetTop(int max, string game = null, string param = null, string version = null)
 		{
 			return _scores.Values.
-				Where(item => IsWantedItem(item, game, param, version)).
+				Where(item => IsWantedItem(item, game, param, version, null)).
 				Take(max).
 				OrderByDescending(item => item.Score);
 		}
 
-		bool IsWantedItem(ScoreItem item, string game, string param, string version) 
+		public IEnumerable<ScoreItem> GetHistory(string game = null, string param = null, string version = null, string user = null)
+		{
+			return _scores.Values.
+				Where(item => IsWantedItem(item, game, param, version, user)).
+				OrderBy(item => item.Date);
+		}
+
+		bool IsWantedItem(ScoreItem item, string game, string param, string version, string user) 
 		{
 			return
 				(string.IsNullOrEmpty(game) || (item.Game == game)) && 
 				(string.IsNullOrEmpty(param) || (item.Param == param)) &&
-				(string.IsNullOrEmpty(version) || (item.Version == version));
+				(string.IsNullOrEmpty(version) || (item.Version == version)) &&
+				(string.IsNullOrEmpty(user) || (item.User == user));
 		}
 
 		public void Add(ScoreItem item)

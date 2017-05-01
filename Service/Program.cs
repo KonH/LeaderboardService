@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 
 namespace LeaderboardService
 {
@@ -9,6 +10,7 @@ namespace LeaderboardService
 		{
 			var urls = new string[]{ "http://*:8080" };
 			var host = new WebHostBuilder()
+				.UseEnvironment("Development")
 				.UseKestrel()
 				.UseStartup<Startup>()
 				.UseUrls(urls)

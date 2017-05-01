@@ -9,6 +9,13 @@ namespace LeaderboardService
 {
     public class Startup
 	{
+		IHostingEnvironment Env { get; set; }
+
+		public Startup(IHostingEnvironment env)
+		{
+			Env = env;
+		}
+
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddMvc();
@@ -16,7 +23,14 @@ namespace LeaderboardService
 			services.AddSingleton<IScoreRepository, InMemoryScoreRepository>();
 			services.AddSingleton<IUserRepository, InMemoryUserRepository>();
 			services.AddSingleton<IGameRepository, InMemoryGameRepository>();
-			services.AddTransient<IAuthManager, AuthManager>();
+			if ( Env.IsDevelopment() )
+			{
+				services.AddTransient<IAuthManager, NoAuthManager>();
+			}
+			else 
+			{
+				services.AddTransient<IAuthManager, AuthManager>();
+			}
 			services.AddSwaggerGen();
     	}
 
