@@ -25,7 +25,7 @@ namespace LeaderboardService
 			services.AddDbContext<ServiceContext>(options => options.UseInMemoryDatabase(Guid.NewGuid().ToString()));
 			services.AddMvc();
 			services.AddSingleton<IScoreRepository, InMemoryScoreRepository>();
-			services.AddSingleton<IUserRepository, InMemoryUserRepository>();
+			services.AddSingleton<IUserRepository, DbUserRepository>();
 			services.AddSingleton<IGameRepository, DbGameRepository>();
 			if ( Env.IsDevelopment() )
 			{

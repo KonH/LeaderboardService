@@ -10,10 +10,12 @@ namespace LeaderboardService.Data
 		}
 		
 		public DbSet<Game> Games { get; set; }
+		public DbSet<User> Users { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
 			builder.Entity<Game>().ToTable("ldb_games").HasKey(g => g.Name);
+			builder.Entity<User>().ToTable("ldb_users").HasKey(u => u.Name);
 		}
     }
 }

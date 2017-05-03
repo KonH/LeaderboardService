@@ -42,8 +42,11 @@ namespace LeaderboardService.Repositories
 
 		public void Update(Game item)
 		{
-			_context.Games.Update(item);
-			_context.SaveChanges();
+			var game = _context.Games.Find(item.Name);
+			if ( game != null ) {
+				_context.Games.Update(game);
+				_context.SaveChanges();
+			}
 		}
 	}
 }
