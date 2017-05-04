@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using MySQL.Data.Entity.Extensions;
 
 namespace LeaderboardService
 {
@@ -22,20 +23,21 @@ namespace LeaderboardService
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddLogging();
-			string dbName = Guid.NewGuid().ToString();
-			services.AddDbContext<ServiceContext>(options => options.UseInMemoryDatabase(dbName));
+			if ( Env.IsDevelopment() )
+			{
+				services.AddTransient<IAuthManager, NoAuthManager>();
+				string dbName = Guid.NewGuid().ToString();
+				services.AddDbContext<ServiceContext>(options => options.UseInMemoryDatabase(dbName));
+			} else 
+			{
+				services.AddTransient<IAuthManager, AuthManager>();
+				string connectionString = Program.Configuration["MySQL"];
+				services.AddDbContext<ServiceContext>(options => options.UseMySQL(connectionString));
+			}
 			services.AddMvc();
 			services.AddSingleton<IScoreRepository, DbScoreRepository>();
 			services.AddSingleton<IUserRepository, DbUserRepository>();
 			services.AddSingleton<IGameRepository, DbGameRepository>();
-			if ( Env.IsDevelopment() )
-			{
-				services.AddTransient<IAuthManager, NoAuthManager>();
-			}
-			else 
-			{
-				services.AddTransient<IAuthManager, AuthManager>();
-			}
 			services.AddSwaggerGen();
     	}
 

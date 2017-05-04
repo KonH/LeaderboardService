@@ -7,6 +7,7 @@ namespace LeaderboardService.Data
     {
 		public ServiceContext(DbContextOptions<ServiceContext> options) : base(options)
 		{
+			Database.EnsureCreated();
 		}
 		
 		public DbSet<Game> Games { get; set; }
@@ -15,9 +16,9 @@ namespace LeaderboardService.Data
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
-			builder.Entity<Game>().ToTable("ldb_games").HasKey(g => g.Name);
-			builder.Entity<User>().ToTable("ldb_users").HasKey(u => u.Name);
-			builder.Entity<ScoreItem>().ToTable("ldb_scores").HasKey(s => s.Key);
+			builder.Entity<Game>().HasKey(g => g.Name);
+			builder.Entity<User>().HasKey(u => u.Name);
+			builder.Entity<ScoreItem>().HasKey(s => s.Key);
 		}
     }
 }

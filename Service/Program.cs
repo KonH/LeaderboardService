@@ -25,7 +25,8 @@ namespace LeaderboardService
 			var configParams = new Dictionary<string, string> 
 			{
 				{ "Port", "8080" },
-				{ "Env", "Production" }
+				{ "Env", "Production" },
+				{ "MySQL", "server=localhost;userid=root;password=root;database=leaderboards;"}
 			};
 			var configBuilder = new ConfigurationBuilder();
 			configBuilder.AddInMemoryCollection(configParams).AddCommandLine(args, GetSwitchMappings(configParams));

@@ -26,6 +26,7 @@ namespace IO.Swagger.Test {
 		public static void Prepare()
 		{
 			var testApi = new TestApi(DefaultConfig);
+			testApi.ApiTestCleanupPost();
 			testApi.ApiTestPreparePost();
 		}
 
