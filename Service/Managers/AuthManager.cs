@@ -78,11 +78,10 @@ namespace LeaderboardService.Managers
 
 		User FindUser(Credentials credentials)
 		{
-			var users = Users.GetAll();
-			if ( users != null )
+			var user = Users.Find(credentials.Name);
+			if ( user != null )
 			{
-				var user = users.FirstOrDefault(u => u.Name == credentials.Name);
-				if ( (user != null) && (user.Password == credentials.Password) )
+				if (user.Password == credentials.Password)
 				{
 					return user;
 				}

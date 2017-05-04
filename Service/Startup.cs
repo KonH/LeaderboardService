@@ -22,9 +22,10 @@ namespace LeaderboardService
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddLogging();
-			services.AddDbContext<ServiceContext>(options => options.UseInMemoryDatabase(Guid.NewGuid().ToString()));
+			string dbName = Guid.NewGuid().ToString();
+			services.AddDbContext<ServiceContext>(options => options.UseInMemoryDatabase(dbName));
 			services.AddMvc();
-			services.AddSingleton<IScoreRepository, InMemoryScoreRepository>();
+			services.AddSingleton<IScoreRepository, DbScoreRepository>();
 			services.AddSingleton<IUserRepository, DbUserRepository>();
 			services.AddSingleton<IGameRepository, DbGameRepository>();
 			if ( Env.IsDevelopment() )

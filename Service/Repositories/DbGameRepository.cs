@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections.Generic;
 using LeaderboardService.Models;
 using LeaderboardService.Data;
@@ -15,37 +16,53 @@ namespace LeaderboardService.Repositories
 
 		public IEnumerable<Game> GetAll() 
 		{
-			return _context.Games;
+			lock ( _context )
+			{
+				return _context.Games.ToList();
+			}
 		}
 
 		public void Add(Game item)
 		{
-			_context.Games.Add(item);
-			_context.SaveChanges();
+			lock ( _context )
+			{
+				_context.Games.Add(item);
+				_context.SaveChanges();
+			}
 		}
 
 		public Game Find(string name)
 		{
-			return _context.Games.Find(name);
+			lock ( _context )
+			{
+				return _context.Games.Find(name);
+			}
 		}
 
 		public Game Remove(string name)
 		{
-			Game item = _context.Games.Find(name);
-			if ( item != null )
+			lock ( _context )
 			{
-				_context.Games.Remove(item);
-				_context.SaveChanges();
+				Game item = _context.Games.Find(name);
+				if ( item != null )
+				{
+					_context.Games.Remove(item);
+					_context.SaveChanges();
+				}
+				return item;
 			}
-			return item;
 		}
 
 		public void Update(Game item)
 		{
-			var game = _context.Games.Find(item.Name);
-			if ( game != null ) {
-				_context.Games.Update(game);
-				_context.SaveChanges();
+			lock ( _context )
+			{
+				var game = _context.Games.Find(item.Name);
+				if ( game != null )
+				{
+					_context.Games.Update(game);
+					_context.SaveChanges();
+				}
 			}
 		}
 	}
