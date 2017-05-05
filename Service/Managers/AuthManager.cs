@@ -32,7 +32,7 @@ namespace LeaderboardService.Managers
 
 		public bool IsAllowed(string header, UserPermission permission) 
 		{
-			return IsAllowed(header, null, permission);
+			return IsAllowed(header, string.Empty, permission);
 		}
 
 		bool NeedAuth() 
@@ -93,7 +93,7 @@ namespace LeaderboardService.Managers
 		{
 			return
 				(user != null) && (user.Roles != null) ?
-				user.Roles.FirstOrDefault(role => ((role.Game == null) || (role.Game == game))) :
+				user.Roles.FirstOrDefault(role => ((string.IsNullOrEmpty(role.Game)) || (role.Game == game))) :
 				null;
 		}
 

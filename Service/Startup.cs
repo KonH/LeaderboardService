@@ -25,14 +25,19 @@ namespace LeaderboardService
 			services.AddLogging();
 			if ( Env.IsDevelopment() )
 			{
-				services.AddTransient<IAuthManager, NoAuthManager>();
 				string dbName = Guid.NewGuid().ToString();
 				services.AddDbContext<ServiceContext>(options => options.UseInMemoryDatabase(dbName));
 			} else 
 			{
-				services.AddTransient<IAuthManager, AuthManager>();
 				string connectionString = Program.Configuration["MySQL"];
 				services.AddDbContext<ServiceContext>(options => options.UseMySQL(connectionString));
+			}
+			if ( Env.IsDevelopment() || Env.IsStaging() )
+			{
+				services.AddTransient<IAuthManager, NoAuthManager>();
+			} else
+			{
+				services.AddTransient<IAuthManager, AuthManager>();
 			}
 			services.AddMvc();
 			services.AddSingleton<IScoreRepository, DbScoreRepository>();
