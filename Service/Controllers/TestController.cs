@@ -3,18 +3,21 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using LeaderboardService.Repositories;
 using LeaderboardService.Models;
+using Microsoft.AspNetCore.Hosting;
 
 namespace LeaderboardService.Controllers
 {
 	[Route("api/[controller]")]
 	public class TestController : Controller
 	{
+		IHostingEnvironment Env { get; set; }
 		IUserRepository  Users  { get; set; }
 		IGameRepository  Games  { get; set; }
 		IScoreRepository Scores { get; set; }
 
-		public TestController(IUserRepository users, IGameRepository games, IScoreRepository scores) 
+		public TestController(IHostingEnvironment env, IUserRepository users, IGameRepository games, IScoreRepository scores) 
 		{
+			Env = env;
 			Users = users;
 			Games = games;
 			Scores = scores;
@@ -23,6 +26,10 @@ namespace LeaderboardService.Controllers
 		[HttpPost("cleanup")]
 		public IActionResult CleanUp()
 		{
+			if( Env.IsProduction() )
+			{
+				return NotFound("Not supported");
+			}
 			var users = Users.GetAll().ToArray();
 			foreach(var user in users)
 			{
@@ -44,6 +51,10 @@ namespace LeaderboardService.Controllers
 		[HttpPost("prepare")]
 		public IActionResult Prepare()
 		{
+			if ( Env.IsProduction() )
+			{
+				return NotFound("Not supported");
+			}
 			PrepareUsers();
 			PrepareGames();
 			PrepareScores();
