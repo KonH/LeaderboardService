@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -34,6 +35,14 @@ namespace LeaderboardService
 
 			var port = Configuration.GetValue<string>("Port");
 			var env = Configuration.GetValue<string>("Env");
+			var mysql = Configuration.GetValue<string>("MySQL");
+
+			Console.WriteLine();
+			Console.WriteLine("Configuration:");
+			Console.WriteLine("Port: '{0}'", port);
+			Console.WriteLine("Env: '{0}'", env);
+			Console.WriteLine("MySQL: '{0}'", mysql);
+			Console.WriteLine();
 
 			var urls = new string[]{ "http://*:" + port };
 			var host = new WebHostBuilder()

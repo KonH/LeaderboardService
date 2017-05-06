@@ -32,7 +32,7 @@ namespace LeaderboardService
 				string connectionString = Program.Configuration["MySQL"];
 				services.AddDbContext<ServiceContext>(options => options.UseMySQL(connectionString));
 			}
-			if ( Env.IsDevelopment() || Env.IsStaging() )
+			if ( Env.IsDevelopment() )
 			{
 				services.AddTransient<IAuthManager, NoAuthManager>();
 			} else
