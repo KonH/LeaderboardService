@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using MySQL.Data.Entity.Extensions;
+using Swashbuckle.Swagger.Model;
 
 namespace LeaderboardService
 {
@@ -49,8 +50,16 @@ namespace LeaderboardService
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, ServiceContext dbContext)
 		{
 			app.UseMvcWithDefaultRoute();
-			app.UseSwagger();
-			app.UseSwaggerUi(swaggerUrl: "https://konhit.xyz/lbservice/swagger/v1/swagger.json");
+			bool exampleUrlUsed = true;
+			if ( exampleUrlUsed )
+			{
+				app.UseSwagger((req, doc) => doc.BasePath = "/lbservice" );
+				app.UseSwaggerUi(swaggerUrl: "https://konhit.xyz/lbservice/swagger/v1/swagger.json");
+			} else 
+			{
+				app.UseSwagger();
+				app.UseSwaggerUi();
+			}
 			loggerFactory.AddConsole().AddDebug();
 		}
 	}
