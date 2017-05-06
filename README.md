@@ -1,10 +1,17 @@
 # LeaderboardService
 
-TODO
+Leaderboards service is a simple API for receive, store and retrieve user scores for games.
 
 ## Overview
 
-TODO
+Service is based on ASP.NET Core, written on C# and uses MySQL as data storage.
+
+**Features:**
+
+- Flexible user rights system with games separation
+- Automatic filter best scores and return its top
+- Save scores history
+- API to manage users and games
 
 ## Example
 
