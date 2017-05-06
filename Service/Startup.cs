@@ -50,7 +50,7 @@ namespace LeaderboardService
 		{
 			app.UseMvcWithDefaultRoute();
 			app.UseSwagger();
-			app.UseSwaggerUi();
+			app.UseSwaggerUi(swaggerUrl: "https://konhit.xyz/lbservice/swagger/v1/swagger.json");
 			loggerFactory.AddConsole().AddDebug();
 		}
 	}
