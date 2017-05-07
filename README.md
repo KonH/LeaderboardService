@@ -55,7 +55,7 @@ git clone https://github.com/KonH/LeaderboardService.git
 cd LeaderboardService/Service
 dotnet restore
 dotnet build
-dotnet run
+dotnet run -MySQL "server=mysql;userid=root;password=root;database=leaderboards;"
 ```
 
 ### MySQL preparation
