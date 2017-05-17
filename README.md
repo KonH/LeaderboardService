@@ -18,7 +18,7 @@ Service is based on ASP.NET Core, written on C# and uses MySQL as data storage.
 You can look at example [here](https://konhit.xyz/lbservice/swagger/ui/index.html). Test service contains:
 
 - HTTPS support using nginx
-- Test game **testGame** which ready to use
+- Test game **testGame** is ready to use
 - Test user **testUser** with post and read scores permissions for test game (password: **mGPRudr8**, auth header: **Basic dGVzdFVzZXI6bUdQUnVkcjg=**)
 
 
@@ -60,7 +60,7 @@ dotnet run -MySQL "server=mysql;userid=root;password=root;database=leaderboards;
 
 ### MySQL preparation
 
-You don't need to create database and tables manually, but master user setup is required:
+You don't need to create any database and tables manually, but master user setup is required:
 
 ```
 INSERT INTO leaderboards.User (Name, Password) VALUES ("admin", "admin_password");
@@ -71,7 +71,7 @@ After it you get access to all API calls.
 
 ### Games and users setup
 
-Every user have permissions, which is game separated (or, if game is not specified, apply to all games). If you need to add new game, add new user with minimal permissions to it.
+Every user has permissions, which is game separated (or, if game is not specified, apply to all games). If you need to add new game, add new user with minimal permissions to it.
 
 ## Service Settings
 
@@ -136,4 +136,4 @@ POST /api/Score/
 
 ## Recommendations
 
-Service use [basic authentication] (https://en.wikipedia.org/wiki/Basic_access_authentication), so client name/password is not encrypted and you need to use https reverse proxy like [nginx] (https://nginx.ru/en/) for security reasons. 
+Service use [basic authentication] (https://en.wikipedia.org/wiki/Basic_access_authentication), so client name/password is not encrypted and you need to use https reverse proxy like [nginx] (https://nginx.ru/en/) for security reasons.
